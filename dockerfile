@@ -1,27 +1,34 @@
-# Imagen base de PHP con FPM
+# Imagen base con PHP y extensiones necesarias
 FROM php:8.2-fpm
 
-# Instalar extensiones necesarias
+# Instalar dependencias del sistema necesarias para extensiones
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql pgsql
+    libpq-dev zip unzip git \
+    && docker-php-ext-install pdo pdo_pgsql
 
-# Instalar Composer
+# Instalar Composer globalmente
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Copiar el proyecto
-COPY . /var/www/html
 
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
 
-# Instalar dependencias Laravel
-RUN composer install --no-dev --optimize-autoloader
+# Copiar SOLO composer.json y composer.lock primero (importante para caching)
+COPY composer.json composer.lock ./
 
-# Permisos
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Instalar dependencias de Laravel
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Puerto de Laravel
-EXPOSE 8000
+# Copiar todo el proyecto
+COPY . .
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Permisos correctos
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# Generar clave si no existe
+RUN php artisan key:generate --force
+
+# Exponer puerto interno
+EXPOSE 8080
+
+# Comando de inicio del servidor Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
