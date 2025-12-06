@@ -10,10 +10,10 @@ class Planilla extends Model
     protected $table = 'planilla';
     
     public $timestamps = false;
-    protected $primaryKey = 'UUID';  // <- le dices que la PK es UUID
+    protected $primaryKey = 'uuid';  // <- le dices que la PK es UUID
     public $incrementing = false;    // <- no es autoincremental
     protected $keyType = 'string';   // <- tipo de la llave es string
-    protected $fillable = ['UUID','FechaCreacion','UsuarioAcargo','TipoDeActividad'];
+    protected $fillable = ['uuid','FechaCreacion','UsuarioAcargo','TipoDeActividad'];
 
     public function usuarios()
     {
