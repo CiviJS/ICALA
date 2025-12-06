@@ -129,7 +129,7 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p class="mb-2" style="margin-bottom: 10px;">© 2025 Iglesia Cristiana Al Amparo Del Altísimo (ICALA). Todos los derechos reservados .</p>
+        <p class="mb-2" style="margin-bottom: 10px;">© 2025 Iglesia Cristiana Al Amparo Del Altísimo (ICALA). Todos los derechos reservados a jeider solano(por ahora) .</p>
         <div class="footer-links">
             <a href="">Privacidad</a>
             <a href="">Contacto</a>

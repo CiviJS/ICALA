@@ -1,25 +1,27 @@
-# Imagen base con PHP 8.2
+# Imagen base de PHP con FPM
 FROM php:8.2-fpm
 
-# Instala extensiones necesarias y herramientas
+# Instalar extensiones necesarias
 RUN apt-get update && apt-get install -y \
-    libzip-dev unzip git curl \
-    && docker-php-ext-install pdo pdo_mysql zip
+    libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
-# Instala Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Instalar Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Carpeta de trabajo dentro del contenedor
-WORKDIR /var/www
+# Copiar el proyecto
+COPY . /var/www/html
 
-# Copia todos los archivos de tu proyecto
-COPY . .
+# Establecer directorio de trabajo
+WORKDIR /var/www/html
 
-# Instala dependencias de Laravel
+# Instalar dependencias Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Expone el puerto que Render asignará
-EXPOSE 10000
+# Permisos
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Comando para levantar Laravel
-CMD php artisan serve --host 0.0.0.0 --port 10000
+# Puerto de Laravel
+EXPOSE 8000
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
