@@ -11,18 +11,19 @@ WORKDIR /var/www/html
 # Copiar composer.json y composer.lock
 COPY composer.json composer.lock ./
 
-# Instalar dependencias sin scripts (para evitar error "artisan no existe")
+# Instalar dependencias Laravel sin scripts (artisan aún no existe)
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
-# Copiar el resto del proyecto
+# Copiar todo el proyecto
 COPY . .
 
-# Ahora sí ejecutar scripts porque artisan ya existe
+# Ahora sí ejecutar scripts (artisan ya existe)
 RUN composer run-script post-autoload-dump
 
+# Permisos
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-RUN php artisan key:generate --force
+# ⚠️ ELIMINAR key:generate — Render colocará APP_KEY desde el dashboard
 
 EXPOSE 8080
 
