@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reporte de Personal</title>
-    @vite('resources/css/reportes/reportes.css')
+    @vite(['resources/css/reportes/reportes.css'])
 </head>
 <body>
     <div style="padding: 20px;">

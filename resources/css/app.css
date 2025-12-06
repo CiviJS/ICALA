@@ -1,3 +1,12 @@
+@import './home/index.css';
+@import './planilla/planilla.css';
+@import './planilla/verPlanilla.css';
+@import './reportes/reportes.css';
+@import './usuarios/crearUsuario.css';
+@import './usuarios/editarUsuario.css';
+
+
+ 
  /* --- ESTILOS CSS INTEGRADOS (NO BORRAR) --- */
         :root {
             --primary: #0f172a;       /* Azul marino oscuro (Casi negro) */

@@ -7,7 +7,7 @@
     <!-- Fuente Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- Carga los estilos definidos arriba -->
-    @vite('resources/css/planilla/verPlanilla.css')
+    @vite(['resources/css/planilla/verPlanilla.css'])
 </head>
 <body class ="fade-in">
 
