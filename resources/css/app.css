@@ -1,10 +1,9 @@
-@import './home/index.css';
+/* Estilos por módulo */
 @import './planilla/planilla.css';
 @import './planilla/verPlanilla.css';
 @import './reportes/reportes.css';
 @import './usuarios/crearUsuario.css';
 @import './usuarios/editarUsuario.css';
-
 
  
  /* --- ESTILOS CSS INTEGRADOS (NO BORRAR) --- */
