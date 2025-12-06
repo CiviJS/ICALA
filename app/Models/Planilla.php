@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
 class Planilla extends Model
 {
     protected $table = 'planilla';
@@ -19,28 +18,24 @@ class Planilla extends Model
         'tipodeactividad',
     ];
 
-
     public function usuarios()
     {
         return $this->belongsToMany(
             Usuario::class,
             'usuario_planilla',
-            'UUIDplanilla',    // FK local en pivote
-            'UUIDusuario'      // FK del otro modelo
+            'uuidplanilla',
+            'uuidusuario'
         );
     }
-   public function encargado()
+
+    public function encargado()
     {
-        return $this->belongsTo(Usuario::class, 'UsuarioAcargo', 'UUID');
+        return $this->belongsTo(Usuario::class, 'usuarioacargo', 'uuid');
     }
 
-
-
-    public function getDiaSemanaAttribute(){
+    public function getDiaSemanaAttribute()
+    {
         Carbon::setLocale('es');
-        return carbon::parse($this->attributes['FechaCreacion'])->translatedFormat('l');
+        return Carbon::parse($this->attributes['fechacreacion'])->translatedFormat('l');
     }
-    
-    
-
 }

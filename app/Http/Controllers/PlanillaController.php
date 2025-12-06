@@ -11,16 +11,15 @@ class PlanillaController extends Controller
 {
     public function store(CrearPlanillaRequest  $request)
     {   
-
         try {
             $planilla = Planilla::create([
-                'UUID'           => Uuid::uuid4()->toString(),
-                'FechaCreacion'  => now(),
-                'UsuarioAcargo' => $request->input('IdUsuario'),
-                'TipoDeActividad' => $request->input('TipoServicio')
+                'uuid'             => Uuid::uuid4()->toString(),
+                'fechacreacion'    => now(),
+                'usuarioacargo'    => $request->input('idusuario'),
+                'tipodeactividad'  => $request->input('tiposervicio')
             ]);
 
-            return redirect("/planillas/ver/{$planilla->UUID}")
+            return redirect("/planillas/ver/{$planilla->uuid}")
                 ->with('message', 'Planilla creada exitosamente.');
         } catch (\Exception $e) {
             return redirect('/')
@@ -30,27 +29,22 @@ class PlanillaController extends Controller
 
     public function index()
     {
-        $planillas = Planilla::select('UUID', 'FechaCreacion','UsuarioAcargo','TipoDeActividad')->get();
-        $usuarios = Usuario::select('UUID','nombre')->get();
+        $planillas = Planilla::select('uuid', 'fechacreacion','usuarioacargo','tipodeactividad')->get();
+        $usuarios = Usuario::select('uuid','nombre')->get();
         return view('planilla.planilla', compact('planillas','usuarios'));
     }
 
     public function asistencia($planillaUUID, $usuarioUUID)
     {
         try {
-            $planilla = Planilla::where('UUID', $planillaUUID)->firstOrFail();
-            $usuario  = Usuario::where('UUID', $usuarioUUID)->firstOrFail();
+            $planilla = Planilla::where('uuid', $planillaUUID)->firstOrFail();
+            $usuario  = Usuario::where('uuid', $usuarioUUID)->firstOrFail();
 
-            // Validación fecha
-            if ($planilla->FechaCreacion < $usuario->fechaIngreso) {
-                return back()->with(
-                    'error',
-                    'No se puede agregar usuario con fecha de ingreso posterior.'
-                );
+            if ($planilla->fechacreacion < $usuario->fechaingreso) {
+                return back()->with('error','No se puede agregar usuario con fecha de ingreso posterior.');
             }
 
-            // Toggle asistencia
-            $yaAsistio = $planilla->usuarios()->where('UUIDusuario', $usuarioUUID)->exists();
+            $yaAsistio = $planilla->usuarios()->where('uuidusuario', $usuarioUUID)->exists();
 
             if ($yaAsistio) {
                 $planilla->usuarios()->detach($usuarioUUID);
@@ -69,17 +63,18 @@ class PlanillaController extends Controller
     public function ver($uuid)
     {
         try {
-            $planilla = Planilla::where('UUID', $uuid)->first();
-            if(!isset($planilla)){
+            $planilla = Planilla::where('uuid', $uuid)->first();
+            if(!$planilla){
                 return redirect('/')->with('error','Plantilla No Existe.');
             }
-            $planilla->encargado->nombre;
-            $usuarios = Usuario::all();
 
-            $asistieron = $planilla->usuarios->pluck('UUID')->toArray();
+            $planilla->encargado->nombre;
+
+            $usuarios = Usuario::all();
+            $asistieron = $planilla->usuarios->pluck('uuid')->toArray();
 
             foreach ($usuarios as $usuario) {
-                $usuario->asistencia = in_array($usuario->UUID, $asistieron);
+                $usuario->asistencia = in_array($usuario->uuid, $asistieron);
             }
 
             return view('planilla.verPlanilla', compact('planilla', 'usuarios'));
@@ -92,8 +87,8 @@ class PlanillaController extends Controller
     public function eliminar($uuid)
     {
         try {
-            $planilla = Planilla::where('UUID', $uuid)->first();
-            if(!isset($planilla)){
+            $planilla = Planilla::where('uuid', $uuid)->first();
+            if(!$planilla){
                 return redirect('/')->with('error','Plantilla No Existe.');
             }
             $planilla->usuarios()->detach();

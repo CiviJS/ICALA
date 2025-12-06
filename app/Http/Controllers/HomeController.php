@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Planilla;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,31 +13,34 @@ class HomeController extends Controller
     {
         return view('home/homeUsuarios');
     }
-    public function Admin()
+
+    public function admin()
     {
         $usuarios = Usuario::all();
-        //Numero de asistencias o tablas asociadas
         $usuarios->loadCount('planillas'); 
 
         foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->NoAsistidas($usuario->fechaIngreso,$usuario->planillas_count);            
+            $usuario->NoAsistidas = $this->NoAsistidas(
+                $usuario->fechaingreso,
+                $usuario->planillas_count
+            );            
         }
+
         return view('home', compact('usuarios'));
     }
 
-    public function NoAsistidas($FechaIngresoUsuario,$NumeroDeAsistencias)
+    public function NoAsistidas($fechaIngresoUsuario, $numeroAsistencias)
     {
-       //por si los usuariios no tienen Fecha de Ingreso por algun error
-        if (empty($FechaIngresoUsuario)) {
+        if (empty($fechaIngresoUsuario)) {
             return 0;
         }
 
-        $fechaComparacion = $FechaIngresoUsuario instanceof \DateTimeInterface
-                            ? $FechaIngresoUsuario->format('Y-m-d H:i:s')
-                            : $FechaIngresoUsuario;
+        $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface
+                            ? $fechaIngresoUsuario->format('Y-m-d H:i:s')
+                            : $fechaIngresoUsuario;
 
-        $planillasMayores = Planilla::where('FechaCreacion', '>', $fechaComparacion)->count();
+        $planillasMayores = Planilla::where('fechacreacion', '>', $fechaComparacion)->count();
         
-        return $planillasMayores - $NumeroDeAsistencias;
+        return $planillasMayores - $numeroAsistencias;
     }
 }

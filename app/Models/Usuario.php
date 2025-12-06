@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Usuario extends Model
 {
     protected $table = 'usuario';
-    protected $primaryKey = 'uuid';  // Aquí le dices que la PK es UUID
-    public $incrementing = false;     // Porque UUID no es autoincremental
-    protected $keyType = 'string';    // Es un string, no un int
-    protected $fillable = ['nombre', 'fechaNacimiento', 'telefono',  'fechaIngreso'];
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected $fillable = [
+        'nombre',
+        'fechanacimiento',
+        'telefono',
+        'fechaingreso'
+    ];
+
     protected $appends = ['edad'];
     public $timestamps = false;
 
@@ -19,14 +26,13 @@ class Usuario extends Model
         return $this->belongsToMany(
             Planilla::class,
             'usuario_planilla',
-            'UUIDusuario',
-            'UUIDplanilla'
+            'uuidusuario',
+            'uuidplanilla'
         );
     }
 
     public function getEdadAttribute()
     {
-        return \Carbon\Carbon::parse($this->fechaNacimiento)->age;
+        return \Carbon\Carbon::parse($this->fechanacimiento)->age;
     }
-    
 }
