@@ -1,0 +1,106 @@
+
+    /* Reset básico y variables */
+    :root {
+        --primary: #0f172a;       /* Azul marino oscuro (Casi negro) */
+        --secondary: #334155;     /* Gris oscuro profesional */
+        --accent: #2563eb;        /* Azul real para botones y acentos */
+        --bg-body: #f8fafc;       /* Fondo gris muy pálido */
+        --white: #ffffff;
+        --border: #e2e8f0;
+        --success: #16a34a;       /* Verde (mantener para alertas) */
+        --danger: #dc2626;        /* Rojo (mantener para alertas) */
+        --radius: 8px;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', Arial, sans-serif;
+        background-color: var(--bg-body); 
+        color: var(--secondary); 
+        line-height: 1.6;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 30px; /* Más padding para que respire */
+        background-color: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow); 
+        border: 1px solid var(--border);
+    }
+    h2 {
+        color: var(--primary); /* Títulos en azul oscuro */
+        border-bottom: 2px solid var(--accent); /* Línea de acento azul */
+        padding-bottom: 5px;
+        margin-top: 30px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    h2:first-of-type {
+        margin-top: 0; /* Elimina margen superior del primer título */
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border-radius: var(--radius);
+        overflow: hidden; /* Para que los bordes redondeados funcionen bien */
+    }
+    th {
+        background-color: var(--primary); /* Encabezados en azul oscuro */
+        color: var(--white);
+        text-align: left;
+        padding: 12px 15px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+    }
+    td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.95rem;
+    }
+    tr:nth-child(even) {
+        background-color: var(--bg-body); /* Color de fondo alternado (gris muy claro) */
+    }
+    tr:last-child td {
+        border-bottom: none; /* Eliminar borde inferior de la última fila */
+    }
+    p {
+        color: var(--secondary);
+        padding: 10px 0;
+    }
+
+    /* Botón de volver (Nuevo) */
+    .btn-volver {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--secondary);
+        border: 1px solid var(--border);
+        background-color: var(--white);
+        margin-bottom: 20px;
+        transition: all 0.2s;
+    }
+    .btn-volver:hover {
+        background-color: var(--border);
+        color: var(--primary);
+    }
+    
+    /* Animación */
+    .fade-in {
+        animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    

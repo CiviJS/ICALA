@@ -1,0 +1,229 @@
+/* --- VARIABLES (Coherentes con planilla.css) --- */
+:root {
+    --primary: #1f2937;    /* Headers, main text (Gris oscuro) */
+    --secondary: #4b5563;  /* Descriptions, labels, table data (Gris medio) */
+    --accent: #10b981;     /* Green - Create/Success (Verde Esmeralda) */
+    --info: #3b82f6;       /* Blue - View/Info (Azul brillante) */
+    --danger: #ef4444;     /* Red - Delete/Error (Rojo) */
+    --bg-body: #f9fafb;    /* Light background (Gris muy claro) */
+    --bg-card: #ffffff;    /* Card background (Blanco) */
+    --border: #e5e7eb;
+    --radius: 8px;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Base y Layout */
+* { 
+    box-sizing: border-box; 
+    /* Transiciones suaves para los efectos "fade" */
+    transition: all 0.25s ease-in-out; 
+}
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--primary);
+    margin: 0;
+    padding: 30px 20px;
+}
+
+.layout-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background-color: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+/* --- TÍTULOS Y CABECERA --- */
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 5px;
+}
+h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed var(--border);
+}
+
+/* --- Botón Volver --- */
+.btn-volver {
+    display: inline-block;
+    margin-bottom: 30px;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    background-color: var(--border);
+    color: var(--secondary);
+    transition: background-color 0.3s, transform 0.2s;
+}
+.btn-volver:hover {
+    background-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+/* --- Alertas de Sesión --- */
+.alert-box {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #fee2e2; /* Rojo claro */
+    color: var(--danger);
+    border: 1px solid #fecaca; /* Borde rojo */
+    border-radius: var(--radius);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* --- TABLA DE USUARIOS --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 20px;
+}
+
+thead th {
+    padding: 15px 20px;
+    background-color: #eef2ff; /* Azul muy claro */
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border);
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover {
+    background-color: #f3f4f6; /* Pequeño fade al pasar el ratón */
+}
+
+tbody td {
+    padding: 15px 20px;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+/* --- Botones de Acción (Marcar/Desmarcar) --- */
+.btn-success, .btn-danger {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s, box-shadow 0.2s, opacity 0.3s;
+}
+
+.btn-success {
+    background-color: var(--accent); /* Verde */
+    color: var(--bg-card);
+}
+.btn-success:hover {
+    background-color: #059669;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+    background-color: var(--danger); /* Rojo */
+    color: var(--bg-card);
+}
+.btn-danger:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+/* --- Indicadores de Asistencia --- */
+.attendance-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 9999px; /* Píldora */
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-asistio {
+    background-color: #d1fae5; /* Verde muy claro */
+    color: #059669; /* Verde oscuro */
+}
+
+.status-no-asistio {
+    background-color: #fee2e2; /* Rojo muy claro */
+    color: #dc2626; /* Rojo oscuro */
+}
+
+
+/* --- RESPONSIVIDAD (Móvil) --- */
+@media screen and (max-width: 768px) {
+    .layout-container {
+        padding: 20px;
+        margin: 10px;
+        box-shadow: none;
+    }
+    
+    table thead {
+        display: none; /* Oculta el encabezado en móvil */
+    }
+
+    table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px;
+    }
+
+    table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px dashed var(--border);
+        text-align: right;
+    }
+
+    table tbody td:last-child {
+        border-bottom: none;
+        padding-top: 15px;
+        justify-content: center;
+    }
+
+    /* Etiqueta visible en móvil */
+    table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--primary);
+        text-align: left;
+    }
+}
+
+/* Animación fade-in global */
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

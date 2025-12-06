@@ -1,0 +1,182 @@
+/* --- ESTILOS CSS INTEGRADOS (NO BORRAR) --- */
+:root {
+    --primary: #0f172a;       /* Azul marino oscuro (Casi negro) */
+    --secondary: #334155;     /* Gris oscuro profesional */
+    --accent: #059669;        /* Azul real para botones */
+    --bg-body: #f8fafc;       /* Fondo gris muy pálido */
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --success: #16a34a;       /* Verde */
+    --danger: #dc2626;        /* Rojo */
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--secondary);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.layout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.main-header {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    border-left: 5px solid var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.brand h1 {
+    color: var(--primary);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand .subtitle {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 400;
+}
+
+/* BOTONES */
+.btn {
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background-color .25s ease, color .25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-align: center;
+}
+
+.btn:hover { 
+    transform: translateY(-2px); 
+}
+
+.btn-primary { background-color: var(--primary); color: var(--white); }
+.btn-primary:hover { background-color: var(--accent); filter: none; } /* Sobreescribir para usar accent en hover */
+
+.btn-outline { background-color: transparent; border: 1px solid var(--secondary); color: var(--secondary); }
+.btn-outline:hover { background-color: var(--border); color: var(--secondary); border-color: var(--border); }
+
+
+/* CONTENEDOR DE FORMULARIOS/TABLAS (TARJETA) */
+.card-wrapper {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    padding: 30px; /* Padding para el contenido dentro de la tarjeta */
+}
+
+/* ESTILOS DE FORMULARIO (NUEVO) */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+    padding: 10px 15px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    color: var(--primary);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+    color: var(--danger);
+    background-color: #fee2e2;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+/* Animaciones */
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --- RESPONSIVE / MÓVIL --- */
+@media (max-width: 768px) {
+    /* Ajustes de Contenedor */
+    body { padding: 10px; }
+    .card-wrapper { padding: 20px; }
+
+    /* Ajustes de Cabecera */
+    .main-header { flex-direction: column; align-items: flex-start; }
+    .main-header .btn { 
+        width: 100%;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    /* Ajustes de Formulario */
+    .form-actions {
+        text-align: center;
+    }
+    .btn-primary {
+        width: 100%; /* El botón principal de acción ocupa todo el ancho en móvil */
+    }
+}
