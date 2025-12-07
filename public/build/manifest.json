@@ -1,0 +1,77 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Cjc4PGCo.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/home/index.css": {
+    "file": "assets/index-D7sqGBGZ.css",
+    "src": "resources/css/home/index.css",
+    "isEntry": true,
+    "name": "index",
+    "names": [
+      "index.css"
+    ]
+  },
+  "resources/css/planilla/planilla.css": {
+    "file": "assets/planilla-ClP-P2eB.css",
+    "src": "resources/css/planilla/planilla.css",
+    "isEntry": true,
+    "name": "planilla",
+    "names": [
+      "planilla.css"
+    ]
+  },
+  "resources/css/planilla/verPlanilla.css": {
+    "file": "assets/verPlanilla-DLnelvrS.css",
+    "src": "resources/css/planilla/verPlanilla.css",
+    "isEntry": true,
+    "name": "verPlanilla",
+    "names": [
+      "verPlanilla.css"
+    ]
+  },
+  "resources/css/reportes/reportes.css": {
+    "file": "assets/reportes-bopZ--GP.css",
+    "src": "resources/css/reportes/reportes.css",
+    "isEntry": true,
+    "name": "reportes",
+    "names": [
+      "reportes.css"
+    ]
+  },
+  "resources/css/usuarios/crearUsuario.css": {
+    "file": "assets/crearUsuario-7yF64Pjw.css",
+    "src": "resources/css/usuarios/crearUsuario.css",
+    "isEntry": true,
+    "name": "crearUsuario",
+    "names": [
+      "crearUsuario.css"
+    ]
+  },
+  "resources/css/usuarios/editarUsuario.css": {
+    "file": "assets/editarUsuario-DN14BXTz.css",
+    "src": "resources/css/usuarios/editarUsuario.css",
+    "isEntry": true,
+    "name": "editarUsuario",
+    "names": [
+      "editarUsuario.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-l0sNRNKZ.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-CAiCLEjY.js",
+    "name": "bootstrap",
+    "src": "resources/js/bootstrap.js",
+    "isEntry": true
+  }
+}
