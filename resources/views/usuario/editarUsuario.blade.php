@@ -28,7 +28,7 @@
     </div>
  
     <div class="card-wrapper">
-        <form action="{{ url('/Usuario/update', $usuario->UUID) }}" method="POST">
+        <form action="{{ url('/Usuario/update', $usuario->uuid) }}" method="POST">
             @csrf
             @method('PUT') <div class="form-group">
                 <label for="nombre">Nombre:</label>

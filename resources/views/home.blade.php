@@ -77,11 +77,11 @@
                                 </td> 
                                 <td data-label="Acciones">
                                     <div class="action-group">
-                                        <a href="{{ url('/Usuario/editar/' . $usuario->UUID) }}" class="btn-icon-action edit" title="Editar">
+                                        <a href="{{ url('/Usuario/editar/' . $usuario->uuid) }}" class="btn-icon-action edit" title="Editar">
                                             ✏️
                                         </a>
                                         
-                                        <form action="{{ url('/Usuario/borrar/' . $usuario->UUID) }}" method="POST" style="display:inline;">
+                                        <form action="{{ url('/Usuario/borrar/' . $usuario->uuid) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-icon-action delete" title="Eliminar" onclick="return confirm('⚠️ ¿Estás seguro de eliminar a {{ $usuario->nombre }}?');">

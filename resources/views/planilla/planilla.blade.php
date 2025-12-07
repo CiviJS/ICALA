@@ -40,7 +40,7 @@
                 <!-- Select original -->
                 <select name="IdUsuario" id="userSelect" size="4">
                     @foreach($usuarios as $usuario)
-                    <option value="{{$usuario->UUID}}">{{$usuario->nombre}}</option>
+                    <option value="{{$usuario->uuid}}">{{$usuario->nombre}}</option>
                     @endforeach 
                 </select>
                 @error('IdUsuario')
@@ -81,12 +81,12 @@
                         <td data-label="Acciones">
                             <div class="action-group">
                                 <!-- Botón Ver -->
-                                <a href="{{ url('planillas/ver/' . $planilla['UUID']) }}" class="btn-icon-action view">
+                                <a href="{{ url('planillas/ver/' . $planilla['uuid']) }}" class="btn-icon-action view">
                                     Ver Detalle
                                 </a>
                                 
                                 <!-- Formulario Borrar -->
-                                <form action="{{ url('planillas/borrar/' . $planilla['UUID']) }}" method="POST" class="delete-form">
+                                <form action="{{ url('planillas/borrar/' . $planilla['uuid']) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="delete-button" onclick="return confirm('⚠️ ¿Estás seguro de que deseas borrar esta planilla? Esta acción no se puede deshacer.');">

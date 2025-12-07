@@ -59,7 +59,7 @@
                 <!-- Columna de Opciones (con botón dinámico) -->
                 <td data-label="Acción">
                     <!-- Formulario de acción POST (cambiado a PUT recomendado para actualizaciones) -->
-                    <form action="{{ url('/planilla/Asistencia/'.$planilla->UUID.'/'.$usuario->UUID) }}" method="POST">
+                    <form action="{{ url('/planilla/Asistencia/'.$planilla->uuid.'/'.$usuario->uuid) }}" method="POST">
                         @csrf
                         <!-- Usar PUT o PATCH es más semántico para una actualización -->
                         @method('PUT') 
