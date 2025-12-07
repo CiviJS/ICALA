@@ -7,49 +7,57 @@
 
  
  /* --- ESTILOS CSS INTEGRADOS (NO BORRAR) --- */
-        :root {
-            --primary: #0f172a;       /* Azul marino oscuro (Casi negro) */
-            --secondary: #334155;     /* Gris oscuro profesional */
-            --accent: #2563eb;        /* Azul real para botones */
-            --bg-body: #f8fafc;       /* Fondo gris muy pálido */
-            --white: #ffffff;
-            --border: #e2e8f0;
-            --success: #16a34a;       /* Verde */
-            --danger: #dc2626;        /* Rojo */
-            --radius: 8px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
+ /* --- ESTILOS CSS INTEGRADOS (NO BORRAR) --- */
+:root {
+    --primary: #0f172a;
+    --secondary: #334155;
+    --accent: #2563eb;
+    --bg-body: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 
-        * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--secondary);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--secondary);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* HEADER */
+.main-header {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    border-left: 5px solid var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* ... resto de tu CSS permanece igual ... */
+
+/* ELIMINADO: fade-in y fadeRow */
+
 
         .layout-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* HEADER */
-        .main-header {
-            background-color: var(--white);
-            padding: 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-            border-left: 5px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+  
 
         .brand h1 {
             color: var(--primary);
