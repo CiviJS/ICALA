@@ -59,7 +59,7 @@ class UsuarioController extends Controller
    public function update(Request $request, $uuid){
     try{
         $this->validar($request);
-        $usuario = Usuario::where('UUID', $uuid)->first();
+        $usuario = Usuario::where('uuid', $uuid)->first();
         $usuario->nombre = $request->input('nombre');
         $usuario->FechaNacimiento = $request->input('fechaNacimiento');
         $usuario->fechaIngreso = $request->input('fechaIngreso');
