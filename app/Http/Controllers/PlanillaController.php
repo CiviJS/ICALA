@@ -15,7 +15,7 @@ class PlanillaController extends Controller
             $planilla = Planilla::create([
                 'uuid'             => Uuid::uuid4()->toString(),
                 'fechacreacion'    => now(),
-                'usuarioacargo'    => $request->input('idusuario'),
+                'usuarioacargo'    => $request->input('IdUsuario'),
                 'tipodeactividad'  => $request->input('tiposervicio')
             ]);
 
