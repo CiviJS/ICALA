@@ -50,7 +50,7 @@ class UsuarioController extends Controller
         return view('usuario/crearUsuario');
     }
     public function editar($uuid){
-        $usuario = Usuario::where('UUID', $uuid)->first();
+        $usuario = Usuario::where('uuid', $uuid)->first();
         if(isset($usuario)){
         return view('usuario/editarUsuario', compact('usuario'));
         }
