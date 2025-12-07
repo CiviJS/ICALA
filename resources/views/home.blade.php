@@ -9,27 +9,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css'])
 </head>
-<body class="fade-in">
-    
-    @if(session('error')) 
+<body>
+    @if(session('error'))
     <div class="layout-container">
         <div class="alert-placeholder">
-        @if(session('error')) <div class="alert-box-error">...</div> @endif
+            <div class="alert-box-error">
+                {{ session('error') }}
+            </div>
         </div>
     </div>
+    @endif
 
+    @if(session('message'))
+    <div class="layout-container">
+        <div class="alert-placeholder">
+            <div class="alert-box">
+                {{ session('message') }}
+            </div>
+        </div>
+    </div>
+    @endif
 
     <div class="layout-container">
         <header class="main-header">
             <div class="brand">
-                <h1>
-                    <span>⛪</span> ICALA 
-                    <span class="subtitle">| Gestión de Integrantes</span>
-                </h1>
+                <h1>⛪ ICALA <span class="subtitle">| Gestión de Integrantes</span></h1>
             </div>
             
             <nav class="top-nav">
-                <!-- Los hrefs son solo placeholders estáticos -->
                 <a href="#" class="btn btn-outline">📋 Planillas</a>
                 <a href="#" class="btn btn-outline">📊 Reportes</a>
                 <a href="#" class="btn btn-primary">+ Nuevo Usuario</a>
@@ -37,10 +44,6 @@
         </header>
 
         <main>
-       @if(session('message')) 
-       <div class="alert-box">...</div> 
-       @endif
-
             <div class="toolbar">
                 <h3>Base de Datos de Miembros (Total Registros)</h3>
                 <a href="#" class="btn btn-outline">Mostrar Todo</a>
@@ -63,8 +66,7 @@
                         </tr>
                     </thead>
                     <tbody>
-               @foreach ($usuarios as $usuario) 
-                        
+                        @foreach ($usuarios as $usuario)
                         <tr>
                             <td data-label="Nombre"><strong>{{ $usuario->nombre }}</strong></td>
                             <td data-label="Nacimiento">{{ $usuario->nacimiento }}</td>
@@ -88,16 +90,12 @@
                                 </div>
                             </td>
                         </tr>
-                    
-                       @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-            
-            <!-- Aquí iría la Paginación (si aplica) -->
-
         </main>
     </div>
-
 </body>
+
 </html>
