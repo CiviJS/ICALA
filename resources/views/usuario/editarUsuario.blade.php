@@ -39,18 +39,18 @@
             </div>
 
             <div class="form-group">
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento', $usuario->fechaNacimiento) }}" required>
-                @error('fechaNacimiento')
-                    <div class="error-message">{{ $errors->first('fechaNacimiento') }}</div>
+                <label for="fechanacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechanacimiento" name="fechanacimiento" value="{{ old('fechanacimiento', $usuario->fechanacimiento) }}" required>
+                @error('fechanacimiento')
+                    <div class="error-message">{{ $errors->first('fechanacimiento') }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="fechaIngreso">Fecha de Ingreso:</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso" value="{{ old('fechaIngreso', $usuario->fechaIngreso) }}" required>
-                @error('fechaIngreso')
-                    <div class="error-message">{{ $message }}</div>
+                <label for="fechaingreso">Fecha de Ingreso:</label>
+                <input type="date" id="fechaingreso" name="fechaingreso" value="{{ old('fechaingreso', $usuario->fechaingreso) }}" required>
+                @error('fechaingreso')
+                 <div class="error-message">{{ $errors->first('fechaingreso') }}</div>
                 @enderror
             </div>
 

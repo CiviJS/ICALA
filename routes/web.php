@@ -5,8 +5,15 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
+Route::get('/test-db', function () {
+    return DB::table('usuario')->get();
+});
 
 Route::get('/portal', [HomeController::class, 'index']);
+
+
 
 Route::get('/', [HomeController::class, 'Admin']);
 

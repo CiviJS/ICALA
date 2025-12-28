@@ -32,17 +32,17 @@
             </div>
 
             <div class="form-group">
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" required>
-                @error('fechaNacimiento')
-                    <div class="error-message">{{ $errors->first('fechaNacimiento') }}</div>
+                <label for="fechanacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechanacimiento" name="fechanacimiento" value="{{ old('fechanacimiento') }}" required>
+                @error('fechanacimiento')
+                    <div class="error-message">{{ $errors->first('fechanacimiento') }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
-                <label for="fechaIngreso">Fecha de Ingreso a la iglesia:</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso" value="{{ old('fechaIngreso') }}" required>
-                @error('fechaIngreso')
+                <label for="fechaingreso">Fecha de Ingreso a la iglesia:</label>
+                <input type="date" id="fechaingreso" name="fechaingreso" value="{{ old('fechaingreso') }}" required>
+                @error('fechaingreso')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
             </div>
