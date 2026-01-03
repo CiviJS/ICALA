@@ -1,7 +1,7 @@
 services:
   - type: web
     name: icala
-    env: php
+    env: docker
     plan: free
-    buildCommand: "composer install --no-dev --optimize-autoloader && php artisan config:cache && php artisan route:cache && php artisan view:cache && npm install && npm run build"
-    startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
+    buildCommand: ""
+    startCommand: "php artisan serve --host=0.0.0.0 --port=8000"
