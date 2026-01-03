@@ -4,89 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Planilla</title>
-    <!-- Fuente Google Fonts (Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Carga los estilos definidos arriba -->
-    @vite(['resources/css/planilla/verPlanilla.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class ="fade-in">
+<body class="fade-in">
 
-<div class="layout-container">
+<div class="layout-container wide">
 
+    <header class="header-accent" style="border-left: 5px solid var(--primary-color); padding-left: 20px; margin-bottom: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">
+                    📋 Planilla del {{ $data['planilla']->FechaCreacion }}
+                </h1>
+                <p class="subtitle" style="color: var(--text-muted); font-size: 1.1rem;">
+                    <strong>Actividad:</strong> {{$data['planilla']->TipoDeActividad}} | 
+                    <strong>Encargado:</strong> {{$data['planilla']->encargado->nombre}}
+                </p>
+            </div>
+            <a href="{{ url('/planillas') }}" class="btn btn-outline">
+                &larr; Volver al Listado
+            </a>
+        </div>
+    </header>
 
-    <!-- Título y Botón Volver -->
-    <h2>📋 Planilla del {{ $data['planilla']->FechaCreacion }}</h2>
-    <h1>Tipo de Actividad: {{$data['planilla']->TipoDeActividad}}</h1>
-    <h1>Usuario a cargo: {{$data['planilla']->encargado->nombre;}}</h1>
-    <a href="{{ url('/planillas') }}" class="btn-volver">
-        ⬅️ Volver al Listado
-    </a>
-         @if (session('error'))
-                <div class="alert-box">
-                    <span>🚫🙅‍♀️</span> {{ session('error') }}
-                </div>
-                <br>
-            @endif
+    @if (session('error'))
+        <div class="alert-box-error">
+            <span>🚫</span> {{ session('error') }}
+        </div>
+    @endif
 
-    <!-- Tabla de Usuarios -->
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Teléfono</th>
-                <th>Asistencia</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data['usuarios'] as $usuario)
-            <tr>
-                <!-- data-label para responsividad móvil -->
-                <td data-label="Nombre">{{ $usuario->nombre }}</td>
-                <td data-label="Edad">{{ $usuario->edad }}</td>
-                <td data-label="Teléfono">{{ $usuario->telefono }}</td>
+    <div class="card-wrapper" style="padding: 0; overflow: hidden;">
+        <div class="table-responsive-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                        <th style="text-align: center;">Asistencia</th>
+                        <th style="text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data['usuarios'] as $usuario)
+                    <tr>
+                        <td data-label="Nombre"><strong>{{ $usuario->nombre }}</strong></td>
+                        <td data-label="Edad">{{ $usuario->edad }} años</td>
+                        <td data-label="Teléfono">{{ $usuario->telefono ?? 'Sin número' }}</td>
 
-                <!-- Columna de Asistencia (con estilos dinámicos) -->
-                <td data-label="Asistencia">
-                    @if ($usuario->asistencia)
-                        <span class="attendance-status status-asistio">Asistió</span>
-                    @else
-                        <span class="attendance-status status-no-asistio">No asistió</span>
-                    @endif
-                </td>
+                        <td data-label="Asistencia" style="text-align: center;">
+                            @if ($usuario->asistencia)
+                                <span class="badge badge-success">Asistió</span>
+                            @else
+                                <span class="badge badge-danger">No asistió</span>
+                            @endif
+                        </td>
 
-                <!-- Columna de Opciones (con botón dinámico) -->
-                <td data-label="Acción">
-
-                    <!-- Formulario de acción POST (cambiado a PUT recomendado para actualizaciones) -->
-                    <form action="{{ url('/planilla/Asistencia/'.$data['planilla']->uuid.'/'.$usuario->uuid) }}" method="POST">
-                        @csrf
-                        <!-- Usar PUT o PATCH es más semántico para una actualización -->
-                        @method('PUT') 
-                        
-                        <!-- Lógica para alternar el botón según el estado de asistencia -->
-                        @if ($usuario->asistencia)
-                            <!-- Si asistió, el botón es rojo para DESMARCAR (estado=0) -->
-                            <input type="hidden" name="estado" value="0">
-                            <button type="submit" class="btn-danger">
-                                Desmarcar Asistencia
-                            </button>
-                        @else
-                            <!-- Si NO asistió, el botón es verde para MARCAR (estado=1) -->
-                            <input type="hidden" name="estado" value="1">
-                            <button type="submit" class="btn-success">
-                                Marcar Asistencia
-                            </button>
-                        @endif
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                        <td data-label="Acción" style="text-align: center;">
+                            <form action="{{ url('/planilla/Asistencia/'.$data['planilla']->uuid.'/'.$usuario->uuid) }}" method="POST" style="display: inline-block; width: 100%;">
+                                @csrf
+                                @method('PUT') 
+                                
+                                @if ($usuario->asistencia)
+                                    <input type="hidden" name="estado" value="0">
+                                    <button type="submit" class="btn" style="background-color: var(--danger-color); color: white; width: 100%; max-width: 200px;">
+                                        Desmarcar Asistencia
+                                    </button>
+                                @else
+                                    <input type="hidden" name="estado" value="1">
+                                    <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 200px;">
+                                        Marcar Asistencia
+                                    </button>
+                                @endif
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 </body>
 </html>
-

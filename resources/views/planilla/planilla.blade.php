@@ -4,90 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planillas Registradas - ICALA</title>
-    <!-- Fuente Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Vincula el CSS externo -->
-    @vite(['resources/css/planilla/planilla.css']) 
-  
+    @vite(['resources/css/app.css', 'resources/js/app.js']) 
 </head>
-<body class ="fade-in">
+<body class="fade-in">
 
-<div class="layout-container">
+<div class="layout-container wide">
 
-    <!-- Encabezado de la Página y Formulario de Creación -->
-    <header class="page-header">
-        <div class="header-content">
-            <h1>📜 Listado de Planillas</h1>
-            <div class="nav-actions">
-                <a href="{{ url('/') }}" class="btn-primary">
-                    ⬅  Volver a Usuarios
-                </a>
-            </div>
+    <header class="main-header">
+        <div class="brand">
+            <h1>Listado de Planillas</h1>
         </div>
-        
-        <!-- Formulario de Creación de Planilla -->
-        <form action="{{url('/planillas/crear')}}" method="POST">
-            @csrf
-            <div class="input-group-user">
-                <p>Persona Encargada</p>
-                <!-- Input de Búsqueda -->
-                <div class="search-container">
-                    <input type="text" id="userSearchInput" placeholder="Buscar por nombre..." onkeyup="filterUsers()">
-                </div>
-
-                <!-- Select original -->
-                <select name="IdUsuario" id="userSelect" size="4">
-                    @foreach($data['usuarios'] as $usuario)
-                    <option value="{{$usuario->uuid}}">{{$usuario->nombre}}</option>
-                    @endforeach 
-                </select>
-                @error('IdUsuario')
-                    <div class="error-message">{{ $errors->first('IdUsuario') }}</div>
-                @enderror
-            </div>
-            
-            <div>
-                <p>Tipo De Evento</p>
-                <select name="TipoServicio" size="4">
-                    <option>Servicio normal</option>
-                    <option>Servicio de jovenes</option>
-                    <option>otro...</option>
-                </select>
-                @error('TipoServicio')
-                    <div class="error-message">{{ $errors->first('TipoServicio') }}</div>
-                @enderror
-            </div>
-
-            <button type="submit">Crear Planilla</button>
-        </form>
+        <div class="user-info">
+            <a href="{{ url('/') }}" class="btn btn-outline">
+                ⬅ Volver a Usuarios
+            </a>
+        </div>
     </header>
 
-    <!-- Tabla de Planillas -->
+    <div class="card-wrapper" style="margin-bottom: 40px;">
+        <h3 style="margin-bottom: 20px; color: var(--primary-color);">Nueva Planilla</h3>
+        
+        <form action="{{url('/planillas/crear')}}" method="POST" class="form-container">
+            @csrf
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                
+                <div class="form-group">
+                    <label>Persona Encargada</label>
+                    <input type="text" id="userSearchInput" placeholder=" Filtrar nombre..." onkeyup="filterUsers()" style="margin-bottom: 5px; padding: 10px;">
+                    
+                    <select name="IdUsuario" id="userSelect" size="2" class="form-group" style="border: 1px solid var(--border-color); border-radius: 8px; ">
+                        @foreach($data['usuarios'] as $usuario)
+                            <option value="{{$usuario->uuid}}">{{$usuario->nombre}}</option>
+                        @endforeach 
+                    </select>
+                    @error('IdUsuario')
+                        <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem;">{{ $errors->first('IdUsuario') }}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo De Evento</label>
+                    <select name="TipoServicio" size="1" style="border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+                        <option>Servicio normal</option>
+                        <option>Servicio de jovenes</option>
+                        <option>otro...</option>
+                    </select>
+                    @error('TipoServicio')
+                        <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem;">{{ $errors->first('TipoServicio') }}</div>
+                    @enderror
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-save">
+                    Crear Planilla
+                </button>
+            </div>
+        </form>
+    </div>
+
     <div class="table-responsive-wrapper">
-        <table class="pro-table">
+        <table>
             <thead>
                 <tr>
                     <th>Fecha de Creación</th>
-                    <th class="text-right">Opciones</th>
+                    <th class="text-center">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($data['planillas'] as $planilla)
                     <tr>
-                        <!-- data-label es CLAVE para la vista móvil -->
-                        <td data-label="Fecha">{{ $planilla['FechaCreacion'].' ('.strtoupper($planilla['DiaSemana']).')' }}</td>
+                        <td data-label="Fecha">
+                            <strong>{{ $planilla['FechaCreacion'] }}</strong> 
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">({{ strtoupper($planilla['DiaSemana']) }})</span>
+                        </td>
                         <td data-label="Acciones">
                             <div class="action-group">
-                                <!-- Botón Ver -->
-                                <a href="{{ url('planillas/ver/' . $planilla['uuid']) }}" class="btn-icon-action view">
+                                <a href="{{ url('planillas/ver/' . $planilla['uuid']) }}" class="btn btn-outline" style="padding: 5px 12px; font-size: 0.8rem;">
                                     Ver Detalle
                                 </a>
                                 
-                                <!-- Formulario Borrar -->
-                                <form action="{{ url('planillas/borrar/' . $planilla['uuid']) }}" method="POST" class="delete-form">
+                                <form action="{{ url('planillas/borrar/' . $planilla['uuid']) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="delete-button" onclick="return confirm('⚠️ ¿Estás seguro de que deseas borrar esta planilla? Esta acción no se puede deshacer.');">
+                                    <button type="submit" class="btn btn-outline" style="border-color: var(--danger-color); color: var(--danger-color);" onclick="return confirm('⚠️ ¿Borrar esta planilla?');">
                                         Borrar
                                     </button>
                                 </form>
@@ -96,8 +99,8 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="2" class="text-center" style="padding: 30px; color: var(--secondary);">
-                            No hay planillas registradas.
+                        <td colspan="2" class="text-center" style="padding: 40px; color: var(--text-muted);">
+                            No hay planillas registradas actualmente.
                         </td>
                     </tr>
                 @endforelse
@@ -107,32 +110,7 @@
 
 </div>
 
-<script>
-    /**
-     * Función para filtrar las opciones del select en tiempo real
-     * basándose en la entrada del campo de búsqueda.
-     */
-    function filterUsers() {
-        // Obtener el input de búsqueda y el select
-        const input = document.getElementById('userSearchInput');
-        const filter = input.value.toUpperCase();
-        const select = document.getElementById('userSelect');
-        const options = select.getElementsByTagName('option');
 
-        // Recorrer todas las opciones y ocultar/mostrar según el filtro
-        for (let i = 0; i < options.length; i++) {
-            const txtValue = options[i].textContent || options[i].innerText;
-            
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                // Si coincide, mostrar la opción
-                options[i].style.display = "";
-            } else {
-                // Si no coincide, ocultar la opción
-                options[i].style.display = "none";
-            }
-        }
-    }
-</script>
 
 </body>
 </html>

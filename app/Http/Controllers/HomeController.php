@@ -34,7 +34,7 @@ class HomeController extends Controller
                 return redirect('/')->with('message' ,'Autenticado correctamente.');
             }
         
-            return redirect('/')->with('error', 'Correo o contraseña invalidos.');
+            return redirect('/login')->with('error', 'Correo o contraseña invalidos.');
 
         } catch(Exception $e){
              return redirect('/logout')->with('error' ,'Ups! algo salio mal.');
