@@ -24,7 +24,7 @@ class PlanillaController extends Controller
     }
     public function index(PlanillasService $service)
     {   
-        $data = $service->ObtenerPlanillas();
+        $data = $service->obtenerPlanillas();
 
         return view('planilla.planilla', compact('data'));
     }
@@ -48,7 +48,7 @@ class PlanillaController extends Controller
     {
         try {
            $this->validarUUID($uuid);
-            $data = $service->ObtenerPlanillasUUID($uuid);
+            $data = $service->obtenerPlanillasUUID($uuid);
             return view('planilla.verPlanilla', compact('data'));
         }catch(InvalidArgumentException $e){
             return redirect('/')->with('error', $e->getMessage()); 

@@ -17,7 +17,7 @@ class UsuarioService
         return Usuario::create($data);
     }
 
-    public function ObtenerUsuarios(): Collection{
+    public function obtenerUsuarios(): Collection{
         return Usuario::all();
     }
     

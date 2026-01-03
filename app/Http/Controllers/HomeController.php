@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\authRequest;
-use App\Services\authService;
+use App\Http\Requests\AuthRequest;
+use App\Services\AuthService;
 use App\Services\ReportesService;
 use Exception;
 use Illuminate\Http\Request;
@@ -25,12 +25,11 @@ class HomeController extends Controller
         return view('home', compact('usuarios'));
     }
 
-    public function auth(authService $service, authRequest $request)
+    public function auth(AuthService $service, AuthRequest $request)
     {
         
         $credentials = $request->validated();
         try {
-        
             if($service->authenticate($credentials)){
                 return redirect('/')->with('message' ,'Autenticado correctamente.');
             }
@@ -42,7 +41,7 @@ class HomeController extends Controller
         }
     }
 
-    public function logout(authService $service, Request $request)
+    public function logout(AuthService $service, Request $request)
     {
         $service->logout();
         $request->session()->invalidate();

@@ -17,12 +17,12 @@ Route::get('/login', [HomeController::class, 'login']);
 Route::middleware('check.auth')->group(function () {
 
 
-Route::get('/', [HomeController::class, 'Admin']);
+Route::get('/', [HomeController::class, 'admin']);
 Route::get('/planillas', [PlanillaController::class, 'index']);
 Route::post('/planillas/crear', [PlanillaController::class, 'store']);
 
 Route::get('/planillas/ver/{uuid}', [PlanillaController::class, 'ver']);
-Route::put('/planilla/Asistencia/{planillaUUID}/{usuarioUUID}', [PlanillaController::class, 'Asistencia']);
+Route::put('/planilla/Asistencia/{planillaUUID}/{usuarioUUID}', [PlanillaController::class, 'asistencia']);
 Route::delete('/planillas/borrar/{uuid}', [PlanillaController::class, 'eliminar']);
 
 Route::get('/usuario/buscar', [UsuarioController::class, 'buscar']);

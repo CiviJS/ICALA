@@ -18,7 +18,7 @@ class PlanillasService{
             ]);
 
     }
-    public function ObtenerPlanillas():array {
+    public function obtenerPlanillas():array {
         $planilla = Planilla::select('uuid', 'fechacreacion','usuarioacargo','tipodeactividad')->get();
         $usuarios = $this->usuarioService->ObtenerUsuarios();
         return [
@@ -26,7 +26,7 @@ class PlanillasService{
             'usuarios' => $usuarios
         ];
     }
-    public function ObtenerPlanillasUUID(string $uuid): array{
+    public function obtenerPlanillasUUID(string $uuid): array{
             $planilla = Planilla::with('encargado', 'usuarios')->where('uuid', $uuid)->firstOrFail();
             $usuarios = $this->usuarioService->ObtenerUsuarios();
             $asistieron = $planilla->usuarios->pluck('uuid')->toArray();
