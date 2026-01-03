@@ -15,9 +15,9 @@
 
 
     <!-- Título y Botón Volver -->
-    <h2>📋 Planilla del {{ $planilla->FechaCreacion }}</h2>
-    <h1>Tipo de Actividad: {{$planilla->TipoDeActividad}}</h1>
-    <h1>Usuario a cargo: {{$planilla->encargado->nombre;}}</h1>
+    <h2>📋 Planilla del {{ $data['planilla']->FechaCreacion }}</h2>
+    <h1>Tipo de Actividad: {{$data['planilla']->TipoDeActividad}}</h1>
+    <h1>Usuario a cargo: {{$data['planilla']->encargado->nombre;}}</h1>
     <a href="{{ url('/planillas') }}" class="btn-volver">
         ⬅️ Volver al Listado
     </a>
@@ -40,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($usuarios as $usuario)
+            @foreach ($data['usuarios'] as $usuario)
             <tr>
                 <!-- data-label para responsividad móvil -->
                 <td data-label="Nombre">{{ $usuario->nombre }}</td>
@@ -58,8 +58,9 @@
 
                 <!-- Columna de Opciones (con botón dinámico) -->
                 <td data-label="Acción">
+
                     <!-- Formulario de acción POST (cambiado a PUT recomendado para actualizaciones) -->
-                    <form action="{{ url('/planilla/Asistencia/'.$planilla->uuid.'/'.$usuario->uuid) }}" method="POST">
+                    <form action="{{ url('/planilla/Asistencia/'.$data['planilla']->uuid.'/'.$usuario->uuid) }}" method="POST">
                         @csrf
                         <!-- Usar PUT o PATCH es más semántico para una actualización -->
                         @method('PUT') 
@@ -88,3 +89,4 @@
 
 </body>
 </html>
+

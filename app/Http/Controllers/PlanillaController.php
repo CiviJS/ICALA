@@ -2,103 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Planilla;
-use App\Models\Usuario;
 use App\Http\Requests\CrearPlanillaRequest;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
+use App\Services\PlanillasService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use InvalidArgumentException;
 
 class PlanillaController extends Controller
 {
-    public function store(CrearPlanillaRequest  $request)
+    public function store(CrearPlanillaRequest $request, PlanillasService $service)
     {   
         try {
-            $planilla = Planilla::create([
-                'uuid'             => Uuid::uuid4()->toString(),
-                'fechacreacion'    => now(),
-                'usuarioacargo'    => $request->input('IdUsuario'),
-                'tipodeactividad'  => $request->input('tiposervicio')
-            ]);
-
+            $data = $request->validated();
+            $planilla = $service->store($data);
             return redirect("/planillas/ver/{$planilla->uuid}")
                 ->with('message', 'Planilla creada exitosamente.');
-        } catch (\Exception $e) {
+        }catch (\Exception $e) {
             return redirect('/')
                 ->with('error', 'Error al crear la planilla: ' . $e->getMessage());
         }
     }
+    public function index(PlanillasService $service)
+    {   
+        $data = $service->ObtenerPlanillas();
 
-    public function index()
-    {
-        $planillas = Planilla::select('uuid', 'fechacreacion','usuarioacargo','tipodeactividad')->get();
-        $usuarios = Usuario::select('uuid','nombre')->get();
-        return view('planilla.planilla', compact('planillas','usuarios'));
+        return view('planilla.planilla', compact('data'));
     }
-
-    public function asistencia($planillaUUID, $usuarioUUID)
+    public function asistencia(PlanillasService $service, string $planillaUUID, string $usuarioUUID)
     {
         try {
-            $planilla = Planilla::where('uuid', $planillaUUID)->firstOrFail();
-            $usuario  = Usuario::where('uuid', $usuarioUUID)->firstOrFail();
-
-            if ($planilla->fechacreacion < $usuario->fechaingreso) {
-                return back()->with('error','No se puede agregar usuario con fecha de ingreso posterior.');
-            }
-
-            $yaAsistio = $planilla->usuarios()->where('uuidusuario', $usuarioUUID)->exists();
-
-            if ($yaAsistio) {
-                $planilla->usuarios()->detach($usuarioUUID);
-            } else {
-                $planilla->usuarios()->attach($usuarioUUID);
-            }
-
-            return redirect("/planillas/ver/{$planillaUUID}")
-                ->with('message', 'Usuario agregado a la planilla exitosamente.');
+            $this->validarUUID($planillaUUID);
+            $this->validarUUID($usuarioUUID);
+            $service->marcarAsistencia($planillaUUID, $usuarioUUID);
+            return redirect("/planillas/ver/{$planillaUUID}")->with('message', 'Usuario agregado a la planilla exitosamente.');
+        } catch(InvalidArgumentException $e){
+            return redirect('/')->with('error', $e->getMessage()); 
+        } catch(ModelNotFoundException){
+            return redirect('/')->with('error', 'La planilla no existe.'); 
         } catch (\Exception $e) {
-            return redirect('/')
-                ->with('error', 'Error al agregar usuario a la planilla: ' . $e->getMessage());
+            return redirect('/')->with('error', 'Error al agregar usuario a la planilla: ' . $e->getMessage());
         }
     }
 
-    public function ver($uuid)
+    public function ver(PlanillasService $service, string $uuid)
     {
         try {
-            $planilla = Planilla::where('uuid', $uuid)->first();
-            if(!$planilla){
-                return redirect('/')->with('error','Plantilla No Existe.');
-            }
+           $this->validarUUID($uuid);
+            $data = $service->ObtenerPlanillasUUID($uuid);
+            return view('planilla.verPlanilla', compact('data'));
+        }catch(InvalidArgumentException $e){
+            return redirect('/')->with('error', $e->getMessage()); 
 
-            $planilla->encargado->nombre;
-
-            $usuarios = Usuario::all();
-            $asistieron = $planilla->usuarios->pluck('uuid')->toArray();
-
-            foreach ($usuarios as $usuario) {
-                $usuario->asistencia = in_array($usuario->uuid, $asistieron);
-            }
-
-            return view('planilla.verPlanilla', compact('planilla', 'usuarios'));
-        } catch (\Exception $e) {
-            return redirect('/')
-                ->with('error', 'Error al ver la planilla: ' . $e->getMessage());
+        }catch(ModelNotFoundException){
+            return redirect('/')->with('error', 'La planilla no existe.'); 
+        } 
+        catch (\Exception $e) {
+            return redirect('/')->with('error', 'Ups! algo salio mal.');
         }
     }
 
-    public function eliminar($uuid)
+    public function eliminar(PlanillasService $service, string $planillaUUID)
     {
         try {
-            $planilla = Planilla::where('uuid', $uuid)->first();
-            if(!$planilla){
-                return redirect('/')->with('error','Plantilla No Existe.');
-            }
-            $planilla->usuarios()->detach();
-            $planilla->delete();
-
-            return redirect('/planillas')
-                ->with('message', 'Planilla eliminada exitosamente.');
+            $this->validarUUID($planillaUUID);
+            $service->eliminar($planillaUUID);
+            return redirect('/planillas')->with('message', 'Planilla eliminada exitosamente.');
+        } catch (ModelNotFoundException $e) {
+            return redirect('/')->with('error', 'La planilla no existe.');
         } catch (\Exception $e) {
-            return redirect('/')
-                ->with('error', 'Error al eliminar la planilla: ' . $e->getMessage());
+            return redirect('/')->with('error', 'Ups! algo salio mal.');
+        }
+    }
+
+    private function validarUUID(string $uuid): void {
+        if (!$uuid) {
+            throw new \InvalidArgumentException('UUID es obligatorio.');
+            }
+        if (!Str::isUuid($uuid)) {
+            throw new \InvalidArgumentException('UUID inválido.');
         }
     }
 }

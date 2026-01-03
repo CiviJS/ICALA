@@ -2,45 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Planilla;
+use App\Http\Requests\authRequest;
+use App\Services\authService;
+use App\Services\ReportesService;
+use Exception;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         return view('home/homeUsuarios');
     }
-
-    public function admin()
+    public function login()
     {
-        $usuarios = Usuario::all();
-        $usuarios->loadCount('planillas'); 
+        return view('auth/login');
+    }
 
-        foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->NoAsistidas(
-                $usuario->fechaingreso,
-                $usuario->planillas_count
-            );            
-        }
-
+    public function admin(ReportesService $service)
+    {
+        $usuarios = $service->usuariosAsistencia();
         return view('home', compact('usuarios'));
     }
 
-    public function NoAsistidas($fechaIngresoUsuario, $numeroAsistencias)
+    public function auth(authService $service, authRequest $request)
     {
-        if (empty($fechaIngresoUsuario)) {
-            return 0;
-        }
-
-        $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface
-                            ? $fechaIngresoUsuario->format('Y-m-d H:i:s')
-                            : $fechaIngresoUsuario;
-
-        $planillasMayores = Planilla::where('fechacreacion', '>', $fechaComparacion)->count();
         
-        return $planillasMayores - $numeroAsistencias;
+        $credentials = $request->validated();
+        try {
+        
+            if($service->authenticate($credentials)){
+                return redirect('/')->with('message' ,'Autenticado correctamente.');
+            }
+        
+            return redirect('/')->with('error', 'Correo o contraseña invalidos.');
+
+        } catch(Exception $e){
+             return redirect('/logout')->with('error' ,'Ups! algo salio mal.');
+        }
     }
+
+    public function logout(authService $service, Request $request)
+    {
+        $service->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
+
 }

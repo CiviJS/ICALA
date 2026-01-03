@@ -4,8 +4,10 @@ namespace App\Models;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Planilla extends Model
 {
+    use HasUuids;
     protected $table = 'planilla';
     protected $primaryKey = 'uuid';
     public $incrementing = false;
@@ -13,10 +15,9 @@ class Planilla extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'uuid',
         'fechacreacion',
         'usuarioacargo',
-        'tipodeactividad',
+        'tiposervicio',
     ];
 
     public function usuarios()

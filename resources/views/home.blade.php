@@ -21,9 +21,14 @@
                 <h1>
                     <span>⛪</span> ICALA 
                     <span class="subtitle">| Gestión de Integrantes</span>
+                    
                 </h1>
+                
             </div>
-
+            @if(auth()->check())
+                        <div><p>Bienvenido {{ auth()->user()->name }}</p></div>
+                        <a href="{{url('/logout')}}"class="btn btn-outline" > Cerrar Sesion 🚪</a>
+            @endif
             <nav class="top-nav">
                 <a href="{{ url('/planillas') }}" class="btn btn-outline">📋 Planillas</a>
                 <a href="{{ url('/Reportes') }}" class="btn btn-outline">📊 Reportes</a>
@@ -63,7 +68,7 @@
                         @foreach ($usuarios as $usuario)
                             <tr>
                                 <td data-label="Nombre"><strong>{{ $usuario->nombre }}</strong></td>
-                                <td data-label="Nacimiento">{{ $usuario->fechaNacimiento }}</td>
+                                <td data-label="Nacimiento">{{ $usuario->fechanacimiento }}</td>
                                 <td data-label="Teléfono">{{ $usuario->telefono }}</td>
                                 <td data-label="Asistencias" class="text-center">
                                     <span class="badge badge-success">{{ $usuario->planillas_count }}</span>

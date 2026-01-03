@@ -15,8 +15,17 @@
                 &larr; Ir al Panel
             </a>
 
+            <form Action ={{url('/Reportes')}} method="GET">
+            <input type="month" name="fecha" value="{{ old('fecha', null) }}" required>
+    
+            <button type="submit" class="btn-volver">Buscar Reporte</button>
+            @error('fecha')
+                <p>La fecha no puede ser mayor a la fecha actual.</p>
+            @enderror   
+            </form>
+
             <h2>🎂 Cumpleaños Hoy</h2>
-            @if($cumpleAniosHoy->isEmpty())
+            @if($data['cumpleAniosHoy']->isEmpty())
                 <p>Nadie cumple años hoy. ¡Un día tranquilo!</p>
             @else
                 <table>
@@ -28,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($cumpleAniosHoy as $u)
+                        @foreach($data['cumpleAniosHoy'] as $u)
                         <tr>
                             <td>{{ $u->nombre }}</td>
                             <td>{{ $u->fechaNacimiento }}</td>
@@ -40,7 +49,7 @@
             @endif
 
             <h2>🎉 Cumpleaños Mañana</h2>
-            @if($cumpleAniosManana->isEmpty())
+            @if($data['cumpleAniosManana']->isEmpty())
                 <p>Nadie cumple años mañana.</p>
             @else
                 <table>
@@ -52,7 +61,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($cumpleAniosManana as $u)
+                        @foreach($data['cumpleAniosManana'] as $u)
                         <tr>
                             <td>{{ $u->nombre }}</td>
                             <td>{{ $u->fechaNacimiento }}</td>
@@ -64,7 +73,7 @@
             @endif
 
             <h2>📌 Nuevos Integrantes (Este Mes)</h2>
-            @if($Nusuarios->isEmpty())
+            @if($data['Nusuarios']->isEmpty())
                 <p>No hay nuevos integrantes este mes.</p>
             @else
                 <table>
@@ -76,7 +85,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($Nusuarios as $u)
+                        @foreach($data['Nusuarios'] as $u)
                         <tr>
                             <td>{{ $u->nombre }}</td>
                             <td>{{ $u->fechaIngreso }}</td>

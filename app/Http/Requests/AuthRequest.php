@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CrearPlanillaRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,24 +19,21 @@ class CrearPlanillaRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-  
-
     public function rules():array
-{
-    return [
-        "IdUsuario" => ['required','string'],
-        "TipoServicio" => ['required','string']
-    ];
-}
-    public function messages(): array
     {
         return [
-            'IdUsuario.required' => 'El usuario es obligatorio',
-            'IdUsuario.string' => 'Usuario Incorrecto',
-            'TipoServicio.required' => 'El tipo de servicio es obligatorio',
-            'TipoServicio.string' => 'Servicio Incorrecto.'
-            
+            'email' => ['required','email'],
+            'password' => ['required','string']
         ];
     }
 
+    public function messages(): array{
+
+        return [
+            'email.required' => 'El correo es obligatorio',
+            'email.email' => 'Correo invalido',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.string' => 'Contraseña invalida.'
+        ];
+    }
 }

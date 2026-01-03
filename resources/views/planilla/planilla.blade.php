@@ -28,10 +28,8 @@
         <!-- Formulario de Creación de Planilla -->
         <form action="{{url('/planillas/crear')}}" method="POST">
             @csrf
-            
             <div class="input-group-user">
                 <p>Persona Encargada</p>
-                
                 <!-- Input de Búsqueda -->
                 <div class="search-container">
                     <input type="text" id="userSearchInput" placeholder="Buscar por nombre..." onkeyup="filterUsers()">
@@ -39,7 +37,7 @@
 
                 <!-- Select original -->
                 <select name="IdUsuario" id="userSelect" size="4">
-                    @foreach($usuarios as $usuario)
+                    @foreach($data['usuarios'] as $usuario)
                     <option value="{{$usuario->uuid}}">{{$usuario->nombre}}</option>
                     @endforeach 
                 </select>
@@ -74,7 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($planillas as $planilla)
+                @forelse ($data['planillas'] as $planilla)
                     <tr>
                         <!-- data-label es CLAVE para la vista móvil -->
                         <td data-label="Fecha">{{ $planilla['FechaCreacion'].' ('.strtoupper($planilla['DiaSemana']).')' }}</td>
