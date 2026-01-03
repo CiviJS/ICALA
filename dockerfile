@@ -1,37 +1,38 @@
-# Usamos PHP 8.2 FPM
 FROM php:8.2-fpm
 
-# Instalar dependencias del sistema + PostgreSQL + herramientas necesarias para Composer
+# Instalar dependencias del sistema + PostgreSQL
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    zip unzip git \
-    libonig-dev \
-    && docker-php-ext-install pdo_pgsql \
-    && rm -rf /var/lib/apt/lists/*
+    libpq-dev zip unzip git \
+    && docker-php-ext-install pdo pdo_pgsql \
+    && docker-php-ext-enable pdo_pgsql
 
-# Instalar Composer globalmente
+# Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Definir directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar primero composer.json y composer.lock para cache de dependencias
+# Copiar primero composer.json para cache de dependencias
 COPY composer.json composer.lock ./
 
-# Instalar dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader
+# Instalar dependencias sin ejecutar scripts todavía
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader \
+    --no-scripts
 
 # Copiar el resto del proyecto
 COPY . .
 
-# Cachear configuración y rutas de Laravel para producción
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+# Ahora sí ejecutar scripts de autoload porque artisan ya existe
+RUN composer run-script post-autoload-dump
 
-# Permisos correctos para storage y bootstrap/cache
+# Permisos correctos
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Exponer puerto dinámico (Render asigna $PORT)
+# Exponer puerto para Render
 EXPOSE 8080
 
-# Comando final para levantar Laravel
-CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
+# Comando para ejecutar Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
