@@ -24,7 +24,9 @@ class CheckAuth
             return redirect('/');
         }
         if(!Admin::find(Auth::id())){
+         
             Auth::logout();
+    
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             return redirect('/login');
