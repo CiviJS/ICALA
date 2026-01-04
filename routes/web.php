@@ -5,13 +5,21 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 
 Route::get('/portal', [HomeController::class, 'index']);
 Route::post('/auth', [HomeController::class, 'auth']);
 Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('/login', [HomeController::class, 'login']);
 
+Route::get('/db-test', function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Conexión OK';
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
 
 
 Route::middleware('check.auth')->group(function () {
