@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-
+use PDO;
 return [
 
     /*
@@ -95,7 +95,9 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'requiere',
+            'sslmode' => 'require',
+       
+
         ],
 
         'sqlsrv' => [
