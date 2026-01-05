@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ControlEventosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
@@ -41,8 +42,8 @@ Route::get('/Usuario/editar/{uuid}', [UsuarioController::class, 'editar']);
 Route::put('/Usuario/update/{uuid}', [UsuarioController::class,'update']);
 Route::delete('/Usuario/borrar/{uuid}', [UsuarioController::class, 'eliminar']);
 
-
 Route::get('/Reportes',[ReportesController::class, 'index']);
-
 Route::post('/Reportes',[ReportesController::class, 'index']);
+
+Route::get('/Eventos',[ControlEventosController::class, 'index']);
 });

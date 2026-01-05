@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Integrantes - ICALA</title>
-    <link rel='icon' type="image/jpeg" href="public/images/ICALA.jpg">
+       <link rel='icon' type="image/jpeg" href="images/ICALA.jpg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="fade-in">

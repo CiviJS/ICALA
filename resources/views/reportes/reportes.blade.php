@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Personal</title>
+        <link rel='icon' type="image/jpeg" href="images/ICALA.jpg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -12,9 +13,12 @@
         <header class="header-accent" style="border-left: 5px solid var(--primary-color); padding-left: 20px; margin-bottom: 30px;">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                 <div>
-                    <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">📊 Reporte de Personal</h1>
+                    <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">  <img src="images/ICALA.jpg" height="30hv"></img> Reporte de Personal</h1>
                     <p class="subtitle" style="color: var(--text-muted);">Consulta de cumpleaños y nuevos ingresos</p>
                 </div>
+                <a href="{{ url('/Eventos') }}" class="btn btn-outline">
+                   Control de eventos
+                </a>
                 <a href="{{ url('/') }}" class="btn btn-outline">
                     &larr; Ir al Panel
                 </a>
