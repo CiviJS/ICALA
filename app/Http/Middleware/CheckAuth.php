@@ -16,7 +16,6 @@ class CheckAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
         if((!Auth::check())) {
             return redirect('/login');
         } 
@@ -24,9 +23,7 @@ class CheckAuth
             return redirect('/');
         }
         if(!Admin::find(Auth::id())){
-         
             Auth::logout();
-    
             $request->session()->invalidate();
             $request->session()->regenerateToken();
             return redirect('/login');

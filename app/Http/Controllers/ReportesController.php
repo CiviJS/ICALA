@@ -13,8 +13,8 @@ class ReportesController extends Controller
         $fecha = Carbon::parse($request->input('fecha'));
         $data = $service->reportesUsuarios($fecha);
         return view('reportes.reportes', compact('data'));
-    } catch(\Exception $e) {  
-        return $e->getMessage();
-    }
+        } catch(\Exception $e) {  
+            return $e->getMessage();
+        }
     }
 }
