@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ministerio ICALA - Inicio</title>
+        <link rel='icon' type="image/jpeg" href="images/ICALA.jpg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="fade-in">
@@ -11,6 +12,7 @@
     <nav class="navbar">
         <div class="navbar-content">
             <div class="logo">
+          
                 <h1>ICALA</h1>
                 <span>Al Amparo Del Altísimo</span>
             </div>

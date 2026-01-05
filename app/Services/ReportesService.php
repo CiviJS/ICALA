@@ -12,7 +12,7 @@ public function usuariosAsistencia()
     $usuarios = Usuario::all();
     $usuarios->loadCount('planillas'); 
     foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->NoAsistidas(
+            $usuario->NoAsistidas = $this->noAsistidas(
                 $usuario->fechaingreso,
                 $usuario->planillas_count
             );            
@@ -27,7 +27,7 @@ public function buscarPorCampo($campo){
                     ->get();
         $usuarios->loadCount('planillas');
        foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->NoAsistidas(
+            $usuario->NoAsistidas = $this->noAsistidas(
                 $usuario->fechaingreso,
                 $usuario->planillas_count
             );            
@@ -35,17 +35,17 @@ public function buscarPorCampo($campo){
     return $usuarios;
     }
 
-public function noAsistidas($fechaIngresoUsuario, $numeroAsistencias)
-    {
-        if (empty($fechaIngresoUsuario)) {
-            return 0;
+    public function noAsistidas($fechaIngresoUsuario, $numeroAsistencias)
+        {
+            if (empty($fechaIngresoUsuario)) {
+                return 0;
+            }
+            $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface
+                                ? $fechaIngresoUsuario->format('Y-m-d H:i:s')
+                                : $fechaIngresoUsuario;
+            $planillasMayores = Planilla::where('fechacreacion', '>', $fechaComparacion)->count();
+            return $planillasMayores - $numeroAsistencias;
         }
-        $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface
-                            ? $fechaIngresoUsuario->format('Y-m-d H:i:s')
-                            : $fechaIngresoUsuario;
-        $planillasMayores = Planilla::where('fechacreacion', '>', $fechaComparacion)->count();
-        return $planillasMayores - $numeroAsistencias;
-    }
 
     public function reportesUsuarios($fecha = null){
         $fechaActual = Carbon::now();

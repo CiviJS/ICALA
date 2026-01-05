@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Integrantes - ICALA</title>
-   
+    <link rel='icon' type="image/jpeg" href="public/images/ICALA.jpg">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="fade-in">
@@ -21,7 +21,7 @@
             
             <div class="brand">
                 <h1>
-                    <span>⛪</span> ICALA 
+                    <span> <img src="images/ICALA.jpg" height="30hv"></img></span> ICALA 
                     <span class="subtitle">| Gestión de Integrantes</span>
                 </h1>
                
@@ -58,7 +58,7 @@
                     <a href="{{ url('/') }}" class="btn btn-outline">Mostrar Todo</a>
                     <form action="{{ url('usuario/buscar') }}" method="GET" class="search-bar">
                         <input type="text" name="campo" placeholder="Buscar nombre..." required>
-                        <button type="submit" class="btn btn-primary">Buscar..</button>
+                        <button type="submit" class="btn btn-primary" style=" margin-top: 10px;">Buscar..</button>
                     </form>
                 </div>
                 
