@@ -12,7 +12,7 @@ public function usuariosAsistencia()
     $usuarios = Usuario::all();
     $usuarios->loadCount('planillas'); 
     foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->noAsistidas(
+            $usuario->noAsistidas = $this->noAsistidas(
                 $usuario->fechaingreso,
                 $usuario->planillas_count
             );            
@@ -21,13 +21,14 @@ public function usuariosAsistencia()
     return $usuarios;
 }
 public function buscarPorCampo($campo){
+    
         $usuarios = Usuario::where('nombre', 'LIKE', "%$campo%")
                     ->orWhere('telefono', 'LIKE', "%$campo%")
                     ->orWhere('fechanacimiento', 'LIKE', "%$campo%")
                     ->get();
         $usuarios->loadCount('planillas');
        foreach ($usuarios as $usuario) {
-            $usuario->NoAsistidas = $this->noAsistidas(
+            $usuario->noAsistidas = $this->noAsistidas(
                 $usuario->fechaingreso,
                 $usuario->planillas_count
             );            
@@ -40,9 +41,7 @@ public function buscarPorCampo($campo){
             if (empty($fechaIngresoUsuario)) {
                 return 0;
             }
-            $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface
-                                ? $fechaIngresoUsuario->format('Y-m-d H:i:s')
-                                : $fechaIngresoUsuario;
+            $fechaComparacion = $fechaIngresoUsuario instanceof \DateTimeInterface ? $fechaIngresoUsuario->format('Y-m-d H:i:s') : $fechaIngresoUsuario;
             $planillasMayores = Planilla::where('fechacreacion', '>', $fechaComparacion)->count();
             return $planillasMayores - $numeroAsistencias;
         }
