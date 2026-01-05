@@ -86,7 +86,7 @@
                                     <span class="badge badge-success">{{ $usuario->planillas_count }}</span>
                                 </td>
                                 <td data-label="Faltas" class="text-center">
-                                    <span class="badge badge-danger">{{ $usuario->NoAsistidas }}</span>
+                                    <span class="badge badge-danger">{{ $usuario->noAsistidas }}</span>
                                 </td>
                                 <td data-label="Acciones">
                                     <div class="action-group">
