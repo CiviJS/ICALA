@@ -22,6 +22,13 @@ Route::get('/db-test', function () {
         return $e->getMessage();
     }
 });
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return 'Cache cleared';
+});
 
 
 Route::middleware('check.auth')->group(function () {
