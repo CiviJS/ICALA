@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/portal', [HomeController::class, 'index']);
@@ -49,5 +50,12 @@ Route::post('/Eventos/crear',[ControlEventosController::class, 'store']);
 Route::get('/Eventos',[ControlEventosController::class, 'index']);
 Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
 Route::delete('/Evento/borrar/{uuid}',[ControlEventosController::class,'eliminarEvento']);
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return 'Cache cleared';
+});
 
 });
