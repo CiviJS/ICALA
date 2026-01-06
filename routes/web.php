@@ -50,12 +50,6 @@ Route::post('/Eventos/crear',[ControlEventosController::class, 'store']);
 Route::get('/Eventos',[ControlEventosController::class, 'index']);
 Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
 Route::delete('/Evento/borrar/{uuid}',[ControlEventosController::class,'eliminarEvento']);
-Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    return 'Cache cleared';
-});
+
 
 });
