@@ -9,15 +9,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/portal', [HomeController::class, 'index']);
-<<<<<<< HEAD
 Route::post('/auth', [HomeController::class, 'auth']) ->middleware('throttle:login');
 Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('/login', [HomeController::class, 'login']); //carga la vista de
-=======
-Route::post('/auth', [HomeController::class, 'auth']);
-Route::get('/logout',[HomeController::class, 'logout']);
-Route::get('/login', [HomeController::class, 'login']);
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
 
 Route::get('/db-test', function () {
     try {
@@ -49,7 +43,6 @@ Route::put('/Usuario/update/{uuid}', [UsuarioController::class,'update']);
 Route::delete('/Usuario/borrar/{uuid}', [UsuarioController::class, 'eliminar']);
 
 Route::get('/Reportes',[ReportesController::class, 'index']);
-<<<<<<< HEAD
 Route::post('/Reportes',[ReportesController::class, 'index']);//esta ruta sirve para enviar y determinar con que fecha va sacar el reporte
 
 Route::post('/Eventos/crear',[ControlEventosController::class, 'store']);
@@ -57,9 +50,4 @@ Route::get('/Eventos',[ControlEventosController::class, 'index']);
 Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
 Route::delete('/Evento/borrar/{uuid}',[ControlEventosController::class,'eliminarEvento']);
 
-=======
-Route::post('/Reportes',[ReportesController::class, 'index']);
-
-Route::get('/Eventos',[ControlEventosController::class, 'index']);
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
 });
