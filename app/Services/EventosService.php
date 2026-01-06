@@ -25,7 +25,7 @@ class EventosService
     }
     public function eliminarEvento(string $uuid):void 
     {
-       $evento=Evento::findOrFail1($uuid);
+       $evento=Evento::findOrFail($uuid);
        $evento->delete();
     }
 }

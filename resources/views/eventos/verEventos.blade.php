@@ -33,7 +33,7 @@
         @endif
 
         <div class="card-wrapper" style="margin-bottom: 2.5rem;">
-            <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Crear Nuevo Evento</h2>
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.2rem;"> Crear Nuevo Evento</h2>
             <form action="/Eventos/crear" method="POST" class="form-container">
                 @csrf
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;">
@@ -81,7 +81,7 @@
                 </div>
 
                 <div style="margin-top: 1rem; text-align: right;">
-                    <button type='submit' class="btn btn-primary">✨ Crear Evento</button>
+                    <button type='submit' class="btn btn-primary">Crear Evento</button>
                 </div>
             </form>
         </div>
