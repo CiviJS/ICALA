@@ -1,10 +1,15 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="es">
 
+=======
+<html lang="en">
+>>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <link rel='icon' type="image/jpeg" href="{{ asset('images/ICALA.jpg') }}">
     <title>Gestión de Eventos ICALA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -133,3 +138,12 @@
 </body>
 
 </html>
+=======
+    <link rel='icon' type="image/jpeg" href="images/ICALA.jpg">
+    <title>Gestion de eventos ICALA</title>
+</head>
+<body>
+   proximamente....
+</body>
+</html>
+>>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83

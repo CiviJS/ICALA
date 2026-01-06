@@ -16,7 +16,13 @@
                     <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">  <img src="images/ICALA.jpg" height="30hv"></img> Reporte de Personal</h1>
                     <p class="subtitle" style="color: var(--text-muted);">Consulta de cumpleaños y nuevos ingresos</p>
                 </div>
+<<<<<<< HEAD
               
+=======
+                <a href="{{ url('/Eventos') }}" class="btn btn-outline">
+                   Control de eventos
+                </a>
+>>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
                 <a href="{{ url('/') }}" class="btn btn-outline">
                     &larr; Ir al Panel
                 </a>
