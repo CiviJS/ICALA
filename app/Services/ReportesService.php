@@ -20,25 +20,6 @@ public function usuariosAsistencia()
 
     return $usuarios;
 }
-<<<<<<< HEAD
-
-=======
-public function buscarPorCampo($campo){
-    
-        $usuarios = Usuario::where('nombre', 'LIKE', "%$campo%")
-                    ->orWhere('telefono', 'LIKE', "%$campo%")
-                    ->orWhere('fechanacimiento', 'LIKE', "%$campo%")
-                    ->get();
-        $usuarios->loadCount('planillas');
-       foreach ($usuarios as $usuario) {
-            $usuario->noAsistidas = $this->noAsistidas(
-                $usuario->fechaingreso,
-                $usuario->planillas_count
-            );            
-        }
-    return $usuarios;
-    }
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
 
     public function noAsistidas($fechaIngresoUsuario, $numeroAsistencias)
         {

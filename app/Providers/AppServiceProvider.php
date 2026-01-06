@@ -4,7 +4,6 @@ namespace App\Providers;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -14,14 +13,9 @@ class AppServiceProvider extends ServiceProvider
 {
 
 
-=======
-
-class AppServiceProvider extends ServiceProvider
-{
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
     /**
-     * Register any application services.
-     */H
+     * Rgister any application services.
+     */
     public function register(): void
     {
         //
@@ -32,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-<<<<<<< HEAD
 
 
         Evento::observe(EventosObserver::class);
@@ -46,11 +39,6 @@ class AppServiceProvider extends ServiceProvider
         ])->withInput();
     });
         });
-=======
-       Validator::extend('alpha_spaces', function ($attribute, $value, $parameters, $validator) {
-        return preg_match('/^[\pL\s]+$/u', $value);
-    });
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
     if (config('app.env') === 'production') {
         URL::forceScheme('https');
     }
