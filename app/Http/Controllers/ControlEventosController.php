@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Http\Requests\eventos\EventoRequest;
 use App\Services\AdminsService;
 use App\Services\EventosService;
@@ -55,21 +54,5 @@ class ControlEventosController extends Controller
         }catch(ModelNotFoundException){
              return  redirect('/Eventos')->with('error', 'el evento que se desea eliminar ya fue eliminado o no existe');
         }
-=======
-use Illuminate\Http\Request;
-
-class ControlEventosController extends Controller
-{
-    public function index()
-    {
-        return view('eventos/verEventos');
-
-    }
-
-    public function crear()
-    {
-        return view('eventos/crearEvento');
-
->>>>>>> 3f9235c7372b5df851f356e0184f95948641ac83
     }
 }
