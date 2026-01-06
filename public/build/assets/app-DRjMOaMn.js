@@ -1,0 +1,1 @@
+function o(){const n=document.getElementById("userSearchInput").value.toUpperCase(),t=document.getElementById("userSelect").getElementsByTagName("option");for(let e=0;e<t.length;e++){const s=t[e].textContent||t[e].innerText;t[e].style.display=s.toUpperCase().indexOf(n)>-1?"":"none"}}window.filterUsers=o;
