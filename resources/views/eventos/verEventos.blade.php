@@ -58,8 +58,8 @@
                     <div class="form-group">
                         <label>Admin Encargado</label>
                         <select name='admin_encargado'>
+                              <option value="" disabled selected>Seleccione un responsable</option>
                             @foreach ($admins as $admin)
-                                <option value="" disabled selected>Seleccione un responsable</option>
                                 <option value="{{ $admin['id'] }}">{{ $admin['name'] }}</option>
                             @endforeach
 

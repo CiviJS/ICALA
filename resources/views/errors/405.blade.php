@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesión Expirada</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Acción no permitida</title>
     <link rel="stylesheet" href="{{ asset('css/tu_estilo.css') }}">
 </head>
 <body class="auth-wrapper"> <div class="auth-card fade-in"> <div class="card-wrapper" style="text-align: center;">
             
             <div style="margin-bottom: 1.5rem;">
-                <span class="badge" style="background: #fef3c7; color: #92400e;">TIEMPO AGOTADO</span>
+                <span class="badge badge-danger">ERROR 405</span>
             </div>
 
-            <h1 style="margin-bottom: 1rem; color: var(--text-main);">Sesión expirada</h1>
+            <h1 style="color: var(--danger-color); margin-bottom: 1rem;">Método no permitido</h1>
             
             <p style="color: var(--text-muted); margin-bottom: 2rem;">
-                Tu sesión expiró por seguridad debido a la inactividad.
+                La acción que intentaste no está permitida por el servidor Dios te bendiga.
             </p>
 
-            <a href="{{ url('/login') }}" class="btn btn-primary" style="justify-content: center; width: 100%;">
-                Iniciar sesión nuevamente
+            <a href="{{ url('/') }}" class="btn btn-primary" style="justify-content: center; width: 100%;">
+                Volver al inicio
             </a>
             
         </div>

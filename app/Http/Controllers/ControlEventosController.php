@@ -10,7 +10,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ControlEventosController extends Controller
 {
-
+    public function __construct( protected AdminsService $admService)
+    {
+       
+    }
     public function store(EventosService $service, EventoRequest $request)
     {
         $request->validated();
@@ -23,23 +26,34 @@ class ControlEventosController extends Controller
         }
     }
 
-    public function index(EventosService $service,AdminsService $admService)
+    public function index(EventosService $service)
     {
         try {
             $eventos = $service->obtenerEventos();
-            $admins = $admService->obtenerAdmins();
+            $admins = $this->admService->obtenerAdmins();
             return view('eventos/verEventos', compact('eventos','admins'));
         } catch (\Exception) {
             return view('eventos/verEventos')->with('eventos', []);
         }
     }
+    public function editar(EventosService $service, $uuid) {
+         try {
+        $evento = $service->obtenerEvento($uuid);
+        $admins = $admins = $this->admService->obtenerAdmins();
+        return view('/eventos/editarEventos', compact('evento','admins'));
+         } catch (Exception) {
+            return redirect('eventos/verEventos')->with('error', 'Ups Algo ocurrio Mal');
 
-    public function actualizarEvento(EventosService $service, EventoRequest $request)
+         }
+
+    }
+
+    public function actualizarEvento(EventosService $service, EventoRequest $request,$uuid)
     {
         $request->validated();
         $data = $request->all();
         try {
-            $service->actualizarEvento($data);
+            $service->actualizarEvento($uuid,$data);
             return redirect('/Eventos')->with('message', 'evento actualizado correcta mente');
         } catch (Exception) {
             return  redirect('/Eventos')->with('error', 'ups Ocurrio un error ');

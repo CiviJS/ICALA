@@ -6,29 +6,13 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
+
 
 Route::get('/portal', [HomeController::class, 'index']);
 Route::post('/auth', [HomeController::class, 'auth']) ->middleware('throttle:login');
 Route::get('/logout',[HomeController::class, 'logout']);
-Route::get('/login', [HomeController::class, 'login']); //carga la vista de
+Route::get('/login', [HomeController::class, 'login']); 
 
-Route::get('/db-test', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Conexión OK';
-    } catch (\Exception $e) {
-        return $e->getMessage();
-    }
-});
-Route::get('/clear-cache', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    return 'Cache cleared';
-});
 
 
 Route::middleware('check.auth')->group(function () {
@@ -55,7 +39,8 @@ Route::post('/Reportes',[ReportesController::class, 'index']);//esta ruta sirve 
 
 Route::post('/Eventos/crear',[ControlEventosController::class, 'store']);
 Route::get('/Eventos',[ControlEventosController::class, 'index']);
-Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
+Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'editar']);
+Route::put('/Evento/actualizar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
 Route::delete('/Evento/borrar/{uuid}',[ControlEventosController::class,'eliminarEvento']);
 
 

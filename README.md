@@ -1,59 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Gestión de Integrantes - ICALA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripción del Proyecto
 
-## About Laravel
+Esta es una aplicación web desarrollada en Laravel para la gestión de integrantes de la iglesia ICALA. Permite administrar usuarios (integrantes), planillas de asistencia, eventos y generar reportes relacionados con la asistencia y actividades de la iglesia.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologías Utilizadas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Backend**: Laravel 12.0 con PHP 8.2+
+- **Frontend**: Blade templates, Tailwind CSS, Vite
+- **Base de Datos**: MySQL (configurado para usar SQLite en desarrollo)
+- **Autenticación**: Laravel Sanctum / Auth
+- **Cache**: Laravel Cache (con soporte para Redis, Memcached, etc.)
+- **Testing**: PHPUnit
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requisitos del Sistema
 
-## Learning Laravel
+- PHP 8.2 o superior
+- Composer
+- Node.js y npm
+- MySQL o SQLite
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Instalación y Configuración
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clonar el repositorio**:
+   ```bash
+   git clone <url-del-repositorio>
+   cd Iglesia
+   ```
 
-## Laravel Sponsors
+2. **Instalar dependencias de PHP**:
+   ```bash
+   composer install
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Instalar dependencias de Node.js**:
+   ```bash
+   npm install
+   ```
 
-### Premium Partners
+4. **Configurar el entorno**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+5. **Configurar la base de datos**:
+   - Editar el archivo `.env` con las credenciales de tu base de datos
+   - Ejecutar las migraciones:
+     ```bash
+     php artisan migrate
+     ```
 
-## Contributing
+6. **Construir assets**:
+   ```bash
+   npm run build
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. **Iniciar el servidor**:
+   ```bash
+   php artisan serve
+   ```
 
-## Code of Conduct
+   O usar el comando de desarrollo que incluye Vite:
+   ```bash
+   composer run dev
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Estructura del Proyecto
 
-## Security Vulnerabilities
+### Modelos (app/Models/)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Usuario**: Representa a los integrantes de la iglesia
+  - Campos: nombre, fecha de nacimiento, teléfono, fecha de ingreso
+  - Relaciones: pertenece a muchas planillas (asistencia)
+  - Atributos calculados: edad
 
-## License
+- **Planilla**: Registra las asistencias a servicios/actividades
+  - Campos: fecha de creación, usuario a cargo, tipo de servicio
+  - Relaciones: muchos a muchos con usuarios, pertenece a un encargado
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Evento**: Gestiona eventos de la iglesia
+  - Campos: nombre, fecha de inicio, descripción, admin encargado
+  - Relaciones: pertenece a un admin
+
+- **Admin**: Usuarios administradores (extiende Authenticatable)
+  - Campos estándar de Laravel: name, email, password
+
+- **usuario_planilla**: Tabla pivote para la relación muchos a muchos entre usuarios y planillas
+
+### Servicios (app/Services/)
+
+- **AuthService**: Maneja la autenticación de administradores
+- **UsuarioService**: CRUD de usuarios, búsqueda por campos
+- **PlanillasService**: Gestión de planillas y asistencia
+- **EventosService**: CRUD de eventos con cache
+- **AdminsService**: Obtención de lista de administradores
+- **ReportesService**: Generación de reportes de asistencia, cumpleaños, nuevos integrantes
+
+### Controladores (app/Http/Controllers/)
+
+- **HomeController**: Maneja la página principal, login/logout, dashboard admin
+- **UsuarioController**: CRUD completo de usuarios
+- **PlanillaController**: Gestión de planillas y marcado de asistencia
+- **ControlEventosController**: CRUD de eventos
+- **ReportesController**: Visualización de reportes
+
+### Rutas (routes/web.php)
+
+- **Públicas**:
+  - `/portal`: Vista de usuarios (sin login)
+  - `/login`: Formulario de login
+  - `/auth`: Procesamiento de login
+  - `/logout`: Cierre de sesión
+
+- **Protegidas** (middleware 'check.auth'):
+  - `/`: Dashboard admin
+  - `/planillas`: Gestión de planillas
+  - `/usuario/*`: CRUD de usuarios
+  - `/Reportes`: Reportes
+  - `/Eventos`: Gestión de eventos
+
+## Funcionalidades Principales
+
+### Gestión de Usuarios
+- Crear, editar, eliminar integrantes
+- Búsqueda por nombre, teléfono o fecha de nacimiento
+- Cálculo automático de edad
+- Validación de fechas de ingreso vs asistencia
+
+### Planillas de Asistencia
+- Crear planillas para servicios/actividades
+- Marcar asistencia de usuarios
+- Validación de que usuarios no puedan asistir antes de su fecha de ingreso
+- Visualización de planillas con usuarios asignados
+
+### Eventos
+- Crear y gestionar eventos de la iglesia
+- Asignación de administradores encargados
+- Cache de eventos para mejor performance
+
+### Reportes
+- Reporte de asistencia por usuario
+- Conteo de planillas no asistidas
+- Nuevos integrantes por mes
+- Cumpleaños del día y del día siguiente
+
+### Autenticación
+- Login/logout de administradores
+- Middleware de protección de rutas
+- Sesiones seguras
+
+## Base de Datos
+
+### Migraciones Principales
+- `users`: Tabla estándar de Laravel (no utilizada directamente)
+- `usuario`: Integrantes de la iglesia
+- `planilla`: Planillas de asistencia
+- `evento`: Eventos
+- `usuario_planilla`: Relación muchos a muchos
+- `cache`, `jobs`, etc.: Tablas estándar de Laravel
+
+### Relaciones
+- Usuario ↔ Planilla: Muchos a muchos (usuario_planilla)
+- Planilla → Usuario: Uno a muchos (encargado)
+- Evento → Admin: Uno a muchos
+
+## Desarrollo
+
+### Comandos Útiles
+
+- **Desarrollo**: `composer run dev` (servidor + Vite + queue + logs)
+- **Testing**: `composer run test`
+- **Build de producción**: `npm run render-build`
+- **Setup inicial**: `composer run setup`
+
+### Middleware Personalizado
+- `check.auth`: Verifica autenticación de admin
+
+### Observers
+- `EventosObserver`: Observa cambios en el modelo Evento
+
+## Despliegue
+
+La aplicación está configurada para despliegue en Render.com con el script `render-build` que optimiza la aplicación para producción.
+
+## Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit tus cambios (`git commit -am 'Agrega nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abre un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.
+
+## Soporte
+
+Para soporte técnico o preguntas sobre el proyecto, contactar al equipo de desarrollo.
