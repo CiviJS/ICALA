@@ -26,7 +26,7 @@ class EventosObserver
     /**
      * Handle the Eventos "deleted" event.
      */
-    public function deleted(Evento $eventos): void
+    public function deleted(Evento $evento): void
     {
         Cache::forget('eventos_todo');
     }

@@ -1,8 +1,13 @@
 # Gestión de Integrantes - ICALA
 
-## Descripción del Proyecto
+## Documentación
 
-Esta es una aplicación web desarrollada en Laravel para la gestión de integrantes de la iglesia ICALA. Permite administrar usuarios (integrantes), planillas de asistencia, eventos y generar reportes relacionados con la asistencia y actividades de la iglesia.
+Para información detallada sobre el proyecto, consulta la documentación completa en el directorio `docs/`:
+
+- **[📖 Documentación Completa](docs/index.md)**: Índice de toda la documentación
+- **[🔌 API Endpoints](docs/api.md)**: Documentación de rutas, servicios y validaciones
+- **[🗄️ Base de Datos](docs/database.md)**: Esquema, relaciones y consultas
+- **[💻 Guía de Desarrollo](docs/development.md)**: Arquitectura, convenciones y mejores prácticas
 
 ## Tecnologías Utilizadas
 

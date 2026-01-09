@@ -11,12 +11,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/portal', [HomeController::class, 'index']);
 Route::post('/auth', [HomeController::class, 'auth']) ->middleware('throttle:login');
 Route::get('/logout',[HomeController::class, 'logout']);
-Route::get('/login', [HomeController::class, 'login']); 
 
-
+Route::get('/login', [HomeController::class, 'login']);
 
 Route::middleware('check.auth')->group(function () {
-
 
 Route::get('/', [HomeController::class, 'admin']);
 Route::get('/planillas', [PlanillaController::class, 'index']);
@@ -42,6 +40,4 @@ Route::get('/Eventos',[ControlEventosController::class, 'index']);
 Route::get('/Evento/Editar/{uuid}',[ControlEventosController::class,'editar']);
 Route::put('/Evento/actualizar/{uuid}',[ControlEventosController::class,'actualizarEvento']);
 Route::delete('/Evento/borrar/{uuid}',[ControlEventosController::class,'eliminarEvento']);
-
-
 });

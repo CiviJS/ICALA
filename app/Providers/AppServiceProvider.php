@@ -26,12 +26,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        
 
         Evento::observe(EventosObserver::class);
 
         Validator::extend('alpha_spaces', function ($attribute, $value, $parameters, $validator) {
         return preg_match('/^[\pL\s]+$/u', $value);});
+
         RateLimiter::for('login', function (Request $request) {
         return Limit::perMinute(5,10)->by($request->ip())->response(function (Request $request, array $headers) {
         return back()->withErrors([
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         ])->withInput();
     });
         });
+        
     if (config('app.env') === 'production') {
         URL::forceScheme('https');
     }
