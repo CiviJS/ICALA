@@ -16,7 +16,7 @@
         </a>        
         @if (session('message'))
             <div class="alert-box">
-                <span>✅</span> {{ session('message') }}
+                {{ session('message') }}
             </div>
         @endif
         

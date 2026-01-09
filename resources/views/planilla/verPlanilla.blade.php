@@ -15,7 +15,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <div>
                 <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">
-                    📋 Planilla del {{ $data['planilla']->FechaCreacion }}
+                     Planilla del {{ $data['planilla']->FechaCreacion }}
                 </h1>
                 <p class="subtitle" style="color: var(--text-muted); font-size: 1.1rem;">
                     <strong>Actividad:</strong> {{$data['planilla']->TipoDeActividad}} | 

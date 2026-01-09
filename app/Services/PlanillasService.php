@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Planilla;
 
+use Illuminate\Database\Eloquent\Collection;
 
 class PlanillasService
 {
@@ -20,14 +21,11 @@ class PlanillasService
             'tipodeactividad'  => $data['TipoServicio']
         ]);
     }
-    public function obtenerPlanillas(): array
+    public function obtenerPlanillas(): Collection
     {
-        $planilla = Planilla::select('uuid', 'fechacreacion', 'usuarioacargo', 'tipodeactividad')->get();
-        $usuarios = $this->usuarioService->ObtenerUsuarios();
-        return [
-            'planillas' => $planilla,
-            'usuarios' => $usuarios
-        ];
+        $planillas = Planilla::select('uuid', 'fechacreacion', 'usuarioacargo', 'tipodeactividad')->get();
+        return $planillas;
+ 
     }
     public function obtenerPlanillasUUID(string $uuid): array
     {

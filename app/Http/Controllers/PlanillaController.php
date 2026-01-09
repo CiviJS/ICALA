@@ -6,10 +6,15 @@ use App\Http\Requests\CrearPlanillaRequest;
 use Illuminate\Support\Str;
 use App\Services\PlanillasService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\AdminsService;
 use InvalidArgumentException;
 
 class PlanillaController extends Controller
-{
+{  
+    public function __construct(protected AdminsService $admService)
+    {
+    }
+    
     public function store(CrearPlanillaRequest $request, PlanillasService $service)
     {   
         try {
@@ -24,9 +29,9 @@ class PlanillaController extends Controller
     }
     public function index(PlanillasService $service)
     {   
-        $data = $service->obtenerPlanillas();
-
-        return view('planilla.planilla', compact('data'));
+        $planillas = $service->obtenerPlanillas();
+        $admins = $this->admService->obtenerAdmins();
+        return view('planilla.planilla', compact('planillas', 'admins'));
     }
     public function asistencia(PlanillasService $service, string $planillaUUID, string $usuarioUUID)
     {
