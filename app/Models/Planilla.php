@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Usuario;
+use App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -16,8 +16,8 @@ class Planilla extends Model
 
     protected $fillable = [
         'fechacreacion',
-        'usuarioacargo',
-        'tiposervicio',
+        'id_admin',
+        'tipodeactividad',
     ];
 
     /**
@@ -40,7 +40,7 @@ class Planilla extends Model
      */
     public function encargado()
     {
-        return $this->belongsTo(Usuario::class, 'usuarioacargo', 'uuid');
+        return $this->belongsTo(Admin::class, 'id_admin', 'id');
     }
 
     /**

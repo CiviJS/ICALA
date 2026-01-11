@@ -9,11 +9,10 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use Notifiable;
-
+      protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
-        'password',
     ];
 
     protected $hidden = [
@@ -21,6 +20,14 @@ class Admin extends Authenticatable
         'remember_token'
 
     ];
+
+    
+    public function Planilla()
+    {
+     return $this->hasMany(Planilla::class);
+
+    }
+    
 
 }
 

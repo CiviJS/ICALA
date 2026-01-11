@@ -3,21 +3,22 @@ namespace App\Services;
 use App\Models\Usuario;
 use App\Models\Planilla;
 use Carbon\Carbon;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 class ReportesService{
     
 
-public function usuariosAsistencia()
+public function usuariosAsistencia(): LengthAwarePaginator
 {
-    $usuarios = Usuario::all();
+    $usuarios = Usuario::orderBy('nombre','desc')->paginate(10);
     $usuarios->loadCount('planillas'); 
     foreach ($usuarios as $usuario) {
             $usuario->noAsistidas = $this->noAsistidas(
                 $usuario->fechaingreso,
                 $usuario->planillas_count
             );            
+            
         }
-
+        
     return $usuarios;
 }
 

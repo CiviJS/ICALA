@@ -52,7 +52,7 @@
                         id="descripcion" 
                         placeholder="Breve detalle del evento"
                         style="overflow-y: auto; resize: vertical; width: 100%; min-height: 60px;"
-                        >{{ $evento->descripcion }}</textarea> @error('descripcion')
+                        >{{ old('descripcion', $evento->descripcion) }}</textarea> @error('descripcion')
                             <div class="alert-box-error">{{ $message }}</div>
                         @enderror
                     </div>

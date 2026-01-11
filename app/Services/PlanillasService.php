@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Planilla;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use Illuminate\Database\Eloquent\Collection;
 
@@ -14,18 +15,18 @@ class PlanillasService
     ) {}
 
     public function store(array $data): Planilla
-    {
+    {      
+    
         return Planilla::create([
             'fechacreacion'    => now(),
-            'usuarioacargo'    => $data['IdUsuario'],
+            'id_admin'    => $data['IdUsuario'],
             'tipodeactividad'  => $data['TipoServicio']
         ]);
     }
-    public function obtenerPlanillas(): Collection
+    public function obtenerPlanillas(): LengthAwarePaginator
     {
-        $planillas = Planilla::select('uuid', 'fechacreacion', 'usuarioacargo', 'tipodeactividad')->get();
+        $planillas = Planilla::orderBy('fechacreacion','desc')->paginate(10);
         return $planillas;
- 
     }
     public function obtenerPlanillasUUID(string $uuid): array
     {
@@ -36,6 +37,7 @@ class PlanillasService
         foreach ($usuarios as $usuario) {
             $usuario->asistencia = in_array($usuario->uuid, $asistieron);
         }
+        
         return [
             'planilla' => $planilla,
             'usuarios' => $usuarios

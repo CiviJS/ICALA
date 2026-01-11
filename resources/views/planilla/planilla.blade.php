@@ -134,7 +134,9 @@
                 </tbody>
             </table>
         </div>
-
+        <a href="{{$planillas->previousPageUrl() }}" class="btn btn-outline">Anterior</a>
+        <span>pagina {{$planillas->currentPage()}} de {{$planillas->lastPage()}}</span>
+         <a href="{{ $planillas->nextPageUrl() }}" class="btn btn-outline">Siguiente</a>
     </div>
 
 </body>

@@ -62,7 +62,7 @@ class PlanillaController extends Controller
             return redirect('/')->with('error', 'La planilla no existe.'); 
         } 
         catch (\Exception $e) {
-            return redirect('/')->with('error', 'Ups! algo salio mal.');
+            return redirect('/')->with('error', 'Ups! algo salio mal.'.$e->getMessage());
         }
     }
 

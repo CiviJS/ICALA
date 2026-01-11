@@ -15,11 +15,13 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
             <div>
                 <h1 style="color: var(--primary-color); font-size: 1.8rem; margin-bottom: 5px;">
-                     Planilla del {{ $data['planilla']->FechaCreacion }}
+                     Planilla del {{ $data['planilla']->fechacreacion }}
                 </h1>
                 <p class="subtitle" style="color: var(--text-muted); font-size: 1.1rem;">
-                    <strong>Actividad:</strong> {{$data['planilla']->TipoDeActividad}} | 
-                    <strong>Encargado:</strong> {{$data['planilla']->encargado->nombre}}
+                    <strong>Actividad:</strong> {{$data['planilla']->tipodeactividad}} | 
+                    <strong>Encargado:</strong> {{$data['planilla']->encargado->name}}
+
+
                 </p>
             </div>
             <a href="{{ url('/planillas') }}" class="btn btn-outline">
@@ -68,12 +70,13 @@
                                 
                                 @if ($usuario->asistencia)
                                     <input type="hidden" name="estado" value="0">
-                                    <button type="submit" class="btn" style="background-color: var(--danger-color); color: white; width: 100%; max-width: 200px;">
+                                    <button type="submit" class="btn btn-outline"
+                                                style="border-color: var(--danger-color); color: var(--danger-color);">
                                         Desmarcar Asistencia
                                     </button>
                                 @else
                                     <input type="hidden" name="estado" value="1">
-                                    <button type="submit" class="btn btn-primary" style="width: 100%; max-width: 200px;">
+                                    <button type="submit" class="btn btn-primary" >
                                         Marcar Asistencia
                                     </button>
                                 @endif
@@ -85,6 +88,9 @@
             </table>
         </div>
     </div>
+            <a href="{{ $data['usuarios']->previousPageUrl() }}" class="btn btn-outline">Anterior</a>
+            <span>Página {{ $data['usuarios']->currentPage() }} de {{ $data['usuarios']->lastPage() }}</span>
+            <a href="{{ $data['usuarios']->nextPageUrl() }}" class="btn btn-outline">Siguiente</a>
 </div>
 
 </body>

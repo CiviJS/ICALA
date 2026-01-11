@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +52,7 @@
         <main>
             @if (session('message'))
                 <div class="alert-box">
-                     {{ session('message') }}
+                    {{ session('message') }}
                 </div>
             @endif
 
@@ -110,6 +111,7 @@
                     </tbody>
                 </table>
 
+
                 @if ($usuarios->isEmpty())
                     <div style="text-align: center; padding: 60px; color: var(--text-muted);">
                         <p style="font-size: 1.2rem;"> No se encontraron resultados.... quizá lo encuentre con el numero
@@ -117,6 +119,9 @@
                     </div>
                 @endif
             </div>
+            <a href="{{ $usuarios->previousPageUrl() }}" class="btn btn-outline">Anterior</a>
+            <span>Página {{ $usuarios->currentPage() }} de {{ $usuarios->lastPage() }}</span>
+            <a href="{{ $usuarios->nextPageUrl() }}" class="btn btn-outline">Siguiente</a>
         </main>
     </div>
 

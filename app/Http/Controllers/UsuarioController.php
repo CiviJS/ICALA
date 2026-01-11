@@ -56,6 +56,7 @@ class UsuarioController extends Controller
             $data = $request -> validated();
             $campo = $data['campo'];
             $usuarios = $service->buscarPorCampo($campo);
+            $usuarios->appends($request->query());
             return view('home')->with( compact('usuarios')); 
         }catch(Exception){
             return redirect('')->with('error','Ups! Algo salio mal.');

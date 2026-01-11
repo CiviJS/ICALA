@@ -4,19 +4,20 @@ namespace App\Services;
 
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Collection;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsuarioService
 {
 
+    public function __construct(protected ReportesService $reporteService) {}
     public function store(array $data): Usuario
     {
         return Usuario::create($data);
     }
 
-    public function obtenerUsuarios(): Collection
+    public function obtenerUsuarios(): LengthAwarePaginator
     {
-        return Usuario::all();
+        return Usuario::orderBy('nombre','desc')->paginate(10);
     }
 
     public function update(string $uuid, array $data): void
@@ -40,12 +41,24 @@ class UsuarioService
         $this->buscarUUID($uuid)->delete();
     }
 
-    public function buscarPorCampo($campo): Usuario
+    public function buscarPorCampo($campo): LengthAwarePaginator
     {
-        $usuarios = Usuario::where('nombre', 'LIKE', "%$campo%")
-            ->orWhere('telefono', 'LIKE', "%$campo%")
-            ->orWhere('fechanacimiento', 'LIKE', "%$campo%")
-            ->get();
+        $usuarios = Usuario::where('nombre', 'LIKE', "%{$campo}%")
+            ->orWhere('telefono', 'LIKE', "%{$campo}%")
+            ->orWhere('fechanacimiento', 'LIKE', "%{$campo}%")
+            ->orderBy('nombre', 'desc')
+            ->paginate(10);
+
+        $usuarios->loadCount('planillas');
+
+        $usuarios->getCollection()->transform(function ($usuario) {
+            $usuario->noAsistidas = $this->reporteService->noAsistidas(
+                $usuario->fechaingreso,
+                $usuario->planillas_count
+            );
+            return $usuario;
+        });
+
         return $usuarios;
     }
 }

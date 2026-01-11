@@ -21,8 +21,8 @@ class ControlEventosController extends Controller
         try {
             $service->store($data);
             return redirect('/Eventos')->with('message', 'Evento creado exitosamente.');
-        } catch (Exception) {
-            return redirect('/Eventos')->with('error', 'Ups! algo salio mal');
+        } catch (Exception $e) {
+            return redirect('/Eventos')->with('error', 'Ups! algo salio mal' );
         }
     }
 
