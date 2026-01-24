@@ -43,9 +43,9 @@ class UsuarioService
 
     public function buscarPorCampo($campo): LengthAwarePaginator
     {
-        $usuarios = Usuario::where('nombre', 'LIKE', "%{$campo}%")
-            ->orWhere('telefono', 'LIKE', "%{$campo}%")
-            ->orWhere('fechanacimiento', 'LIKE', "%{$campo}%")
+        $usuarios = Usuario::where('nombre', 'ILIKE', "%{$campo}%")
+            ->orWhere('telefono', 'ILIKE', "%{$campo}%")
+            ->orWhere('fechanacimiento', 'ILIKE', "%{$campo}%")
             ->orderBy('nombre', 'desc')
             ->paginate(10);
 

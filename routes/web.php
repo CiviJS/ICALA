@@ -6,16 +6,23 @@ use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\PlanillaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 
 Route::get('/portal', [HomeController::class, 'index']);
 Route::post('/auth', [HomeController::class, 'auth']) ->middleware('throttle:login');
-Route::get('/logout',[HomeController::class, 'logout']);
-
 Route::get('/login', [HomeController::class, 'login']);
+Route::get('/test-bd' (), function () {
+    try {
+        DB::connection()->getPdo();
+        return 'Conexión exitosa a la base de datos: ' . DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        return 'Error al conectar a la base de datos: ' . $e->getMessage();
+    }
+});
 
 Route::middleware('check.auth')->group(function () {
-
+Route::get('/logout',[HomeController::class, 'logout']);
 Route::get('/', [HomeController::class, 'admin']);
 Route::get('/planillas', [PlanillaController::class, 'index']);
 Route::post('/planillas/crear', [PlanillaController::class, 'store']);

@@ -51,9 +51,10 @@ class PlanillaController extends Controller
 
     public function ver(PlanillasService $service, string $uuid)
     {
+        $campoUsuario = request()->query('campoUsuario', '');
         try {
            $this->validarUUID($uuid);
-            $data = $service->obtenerPlanillasUUID($uuid);
+            $data = $service->obtenerPlanillaUUID($uuid,$campoUsuario);
             return view('planilla.verPlanilla', compact('data'));
         }catch(InvalidArgumentException $e){
             return redirect('/')->with('error', $e->getMessage()); 
