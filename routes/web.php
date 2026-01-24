@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 Route::get('/portal', [HomeController::class, 'index']);
 Route::post('/auth', [HomeController::class, 'auth']) ->middleware('throttle:login');
 Route::get('/login', [HomeController::class, 'login']);
-Route::get('/test-bd' (), function () {
+Route::get('/test-bd', function () {
     try {
         DB::connection()->getPdo();
         return 'Conexión exitosa a la base de datos: ' . DB::connection()->getDatabaseName();
