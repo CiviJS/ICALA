@@ -36,7 +36,7 @@
 
                 @error('fecha')
                     <div class="alert-box-error" style="margin-top: 10px; width: 100%;">
-                        ⚠️ La fecha no puede ser mayor a la fecha actual.
+                         La fecha no puede ser mayor a la fecha actual.
                     </div>
                 @enderror   
             </form>
@@ -62,7 +62,7 @@
                                 @foreach($data['cumpleAniosHoy'] as $u)
                                 <tr>
                                     <td data-label="Nombre"><strong>{{ $u->nombre }}</strong></td>
-                                    <td data-label="Nacimiento">{{ $u->fechaNacimiento }}</td>
+                                    <td data-label="Nacimiento">{{ $u->fechanacimiento }}</td>
                                     <td data-label="Edad"><span class="badge badge-success">{{ $u->edad }} años</span></td>
                                 </tr>
                                 @endforeach
@@ -90,7 +90,7 @@
                                 @foreach($data['cumpleAniosManana'] as $u)
                                 <tr>
                                     <td data-label="Nombre"><strong>{{ $u->nombre }}</strong></td>
-                                    <td data-label="Nacimiento">{{ $u->fechaNacimiento }}</td>
+                                    <td data-label="Nacimiento">{{ $u->fechanacimiento }}</td>
                                     <td data-label="Edad"><span class="badge badge-success">{{ $u->edad }} años</span></td>
                                 </tr>
                                 @endforeach
@@ -132,3 +132,4 @@
     </div>
 </body>
 </html>
+

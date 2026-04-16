@@ -36,7 +36,7 @@
 
         @if (session('error'))
             <div class="alert-box-error">
-                <span>🚫</span> {{ session('error') }}
+                 {{ session('error') }}
             </div>
         @endif
         <div style="gap: 10px; margin:1vh">

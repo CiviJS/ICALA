@@ -21,7 +21,7 @@
         @endif
         
         <div class="brand">
-             <h1>Editar Usuario: {{ $usuario->nombre }}</h1>
+             <h1>Editar integrante: {{ $usuario->nombre }}</h1>
              <p class="subtitle">Modifique los campos necesarios y guarde los cambios.</p>
         </div>
        
@@ -71,3 +71,4 @@
 </div>
 </body>
 </html>
+

@@ -118,7 +118,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline"
                                             style="border-color: var(--danger-color); color: var(--danger-color); padding: 0.4rem 0.8rem;"
-                                            onclick="return confirm('⚠️ ¿Estás seguro de eliminar este evento?');">
+                                            onclick="return confirm(' ¿Estás seguro de eliminar este evento?');">
                                             Borrar
                                         </button>
                                     </form>

@@ -14,7 +14,7 @@
     <div class="layout-container">
         @if (session('error'))
             <div class="alert-box-error">
-                <span><strong>⚠️ Error:</strong></span> {{ session('error') }}
+                <span><strong> Error:</strong></span> {{ session('error') }}
             </div>
         @endif
 
@@ -41,7 +41,7 @@
 
                     <a href="{{ url('/planillas') }}" class="btn btn-outline">Planillas</a>
                     <a href="{{ url('/Reportes') }}" class="btn btn-outline">Reportes</a>
-                    <a href="{{ url('/Usuario/crear') }}" class="btn btn-primary">+ Nuevo Usuario</a>
+                    <a href="{{ url('/Usuario/crear') }}" class="btn btn-primary">Nuevo Integrante</a>
                     <a href="{{ url('/Eventos') }}" class="btn btn-outline">Control de eventos</a>
                 </nav>
             </div>
@@ -102,7 +102,7 @@
                                             <button type="submit" class="btn btn-outline"
                                                 style="border-color: var(--danger-color); color: var(--danger-color);"
                                                 title="Eliminar"
-                                                onclick="return confirm('⚠️ ¿Estás seguro de eliminar a {{ $usuario->nombre }}?');">Eliminar..</button>
+                                                onclick="return confirm(' ¿Estás seguro de eliminar a {{ $usuario->nombre }}?');">Eliminar..</button>
                                         </form>
                                     </div>
                                 </td>

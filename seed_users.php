@@ -21,9 +21,9 @@ for($i=0; $i<100; $i++) {
         'nombre' => $faker->name,
 
         'fechanacimiento' => $faker->date('Y-m-d', '2005-01-01'),
-
+  
         'telefono' => $faker->numerify('##########'),
-
+ 
         'fechaingreso' => $faker->date('Y-m-d', '2023-01-01')
 
     ]);

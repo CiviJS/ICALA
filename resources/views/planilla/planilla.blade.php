@@ -115,7 +115,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline"
                                             style="border-color: var(--danger-color); color: var(--danger-color); padding: 4px 10px; font-size: 0.75rem;"
-                                            onclick="return confirm('⚠️ ¿Borrar esta planilla?');">
+                                            onclick="return confirm(' ¿Borrar esta planilla?');">
                                             Borrar
                                         </button>
                                     </form>

@@ -10,5 +10,5 @@ class usuario_planilla extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
-    protected $fillable = [' UUIDplanilla',' UUIDusuario'];
+    protected $fillable = [' uuidplanilla',' uuidusuario'];
 }

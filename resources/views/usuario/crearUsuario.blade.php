@@ -16,7 +16,7 @@
                 &larr; Volver al Listado
             </a>
             <div class="brand">
-                <h1>Registrar Nuevo Usuario</h1>
+                <h1>Registrar Nuevo Integrante</h1>
                 <p class="subtitle">Ingrese los datos requeridos para el registro oficial en la base de datos.</p>
             </div>
         </header>
@@ -31,7 +31,7 @@
                         <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}" placeholder="Ej. Juan Pérez" required>
                         @error('nombre')
                             <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem; margin-top: 5px;">
-                                ⚠️ {{ $errors->first('nombre') }}
+                                 {{ $errors->first('nombre') }}
                             </div>
                         @enderror
                     </div>
@@ -41,7 +41,7 @@
                         <input type="date" id="fechanacimiento" name="fechanacimiento" value="{{ old('fechanacimiento') }}" required>
                         @error('fechanacimiento')
                             <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem; margin-top: 5px;">
-                                ⚠️ {{ $errors->first('fechanacimiento') }}
+                                 {{ $errors->first('fechanacimiento') }}
                             </div>
                         @enderror
                     </div>
@@ -51,7 +51,7 @@
                         <input type="date" id="fechaingreso" name="fechaingreso" value="{{ old('fechaingreso') }}" required>
                         @error('fechaingreso')
                             <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem; margin-top: 5px;">
-                                ⚠️ {{ $message }}
+                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
@@ -61,14 +61,14 @@
                         <input type="text" id="telefono" name="telefono" value="{{ old('telefono') }}" placeholder="Ej. 123456789" required>
                         @error('telefono')
                             <div class="error-message" style="color: var(--danger-color); font-size: 0.8rem; margin-top: 5px;">
-                                ⚠️ {{ $errors->first('telefono') }}
+                                 {{ $errors->first('telefono') }}
                             </div>
                         @enderror
                     </div>
 
                     <div class="form-actions">
                         <button type="submit" class="btn-save">
-                            <span>💾</span> Guardar Registro
+                         Guardar Registro
                         </button>
                     </div>
                 </form>
