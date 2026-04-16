@@ -1,75 +1,74 @@
-# Gestión de Integrantes - ICALA
+# ⛪ Gestión de Integrantes - ICALA
 
-## Documentación
+![Laravel](https://img.shields.io/badge/Laravel-12.0-FF2D20?style=for-the-badge&logo=laravel)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql)
 
-Para información detallada sobre el proyecto, consulta la documentación completa en el directorio `docs/`:
+Sistema integral para la administración de integrantes, control de asistencia mediante planillas y gestión de eventos eclesiásticos. Diseñado para ofrecer reportes precisos y una gestión eficiente de la comunidad.
 
-- **[📖 Documentación Completa](docs/index.md)**: Índice de toda la documentación
-- **[🔌 API Endpoints](docs/api.md)**: Documentación de rutas, servicios y validaciones
-- **[🗄️ Base de Datos](docs/database.md)**: Esquema, relaciones y consultas
-- **[💻 Guía de Desarrollo](docs/development.md)**: Arquitectura, convenciones y mejores prácticas
+---
+##  Documentación Especializada
 
-## Tecnologías Utilizadas
+Para detalles técnicos específicos, explora nuestros módulos en `/docs`:
 
-- **Backend**: Laravel 12.0 con PHP 8.2+
-- **Frontend**: Blade templates, Tailwind CSS, Vite
-- **Base de Datos**: MySQL (configurado para usar SQLite en desarrollo)
-- **Autenticación**: Laravel Sanctum / Auth
-- **Cache**: Laravel Cache (con soporte para Redis, Memcached, etc.)
-- **Testing**: PHPUnit
+* [ **Índice General**](docs/index.md) - Mapa completo del proyecto.
+* [ **API & Endpoints**](docs/api.md) - Contratos de servicios y validaciones.
+* [ **Esquema de Datos**](docs/database.md) - Modelado E/R y optimización de consultas.
+* [ **Arquitectura**](docs/development.md) - Guía de convenciones y Clean Code.
 
-## Requisitos del Sistema
+---
 
-- PHP 8.2 o superior
-- Composer
-- Node.js y npm
-- MySQL o SQLite
+##  Stack Tecnológico
 
-## Instalación y Configuración
+| Capa | Tecnología |
+| :--- | :--- |
+| **Núcleo** | Laravel 12.0 (PHP 8.2+) |
+| **Frontend** | Blade Templates + Tailwind CSS |
+| **Tooling** | Vite 6.0 |
+| **Persistencia** | PostgreSQL (Producción) / SQLite (Dev) |
+| **Seguridad** | Laravel Sanctum & Middleware personalizado |
+| **Performance** | Cache Layer (Redis Ready) |
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone <url-del-repositorio>
-   cd Iglesia
-   ```
+---
 
-2. **Instalar dependencias de PHP**:
-   ```bash
+## Instalación y Setup
+
+Sigue estos pasos para levantar el entorno local:
+
+1. **Clonación y dependencias:**
+   
+   git clone [https://github.com/CiviJS/ICALA.git](https://github.com/CiviJS/ICALA.git)
+   cd ICALA
    composer install
-   ```
-
-3. **Instalar dependencias de Node.js**:
-   ```bash
    npm install
-   ```
 
-4. **Configurar el entorno**:
-   ```bash
+2.  **Configurar el entorno**:
+   
    cp .env.example .env
    php artisan key:generate
-   ```
+   
 
 5. **Configurar la base de datos**:
    - Editar el archivo `.env` con las credenciales de tu base de datos
    - Ejecutar las migraciones:
-     ```bash
+
      php artisan migrate
-     ```
+    
 
 6. **Construir assets**:
-   ```bash
+  
    npm run build
-   ```
+   
 
 7. **Iniciar el servidor**:
-   ```bash
+   
    php artisan serve
-   ```
+   
 
    O usar el comando de desarrollo que incluye Vite:
-   ```bash
+   
    composer run dev
-   ```
+   
 
 ## Estructura del Proyecto
 
@@ -200,7 +199,3 @@ La aplicación está configurada para despliegue en Render.com con el script `re
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT.
-
-## Soporte
-
-Para soporte técnico o preguntas sobre el proyecto, contactar al equipo de desarrollo.
